@@ -3,29 +3,143 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Histoire de Ryoma Uchiha</title>
-    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display&display=swap" rel="stylesheet">
-    <link rel="stylesheet" href="style.css">
+    <title>Mon Histoire - Ryoma</title>
+    <style>
+        /* Body Styling */
+        body {
+            font-family: 'Georgia', serif;
+            background-color: #f0f4f8;
+            color: #333;
+            margin: 0;
+            padding: 0;
+            height: 100vh;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            text-align: center;
+            overflow: hidden;
+        }
+
+        /* Animation de texte pour l'entrée */
+        h1 {
+            font-size: 3rem;
+            color: #1d3557;
+            opacity: 0;
+            animation: fadeIn 3s forwards;
+        }
+
+        @keyframes fadeIn {
+            0% {
+                opacity: 0;
+                transform: translateY(-50px);
+            }
+            100% {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        /* Animation pour le sommaire */
+        .sommaire {
+            display: none;
+            margin-top: 2rem;
+            background-color: #2a9d8f;
+            padding: 1rem;
+            width: 80%;
+            border-radius: 8px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+            animation: slideIn 1s forwards;
+        }
+
+        @keyframes slideIn {
+            0% {
+                opacity: 0;
+                transform: translateY(-50px);
+            }
+            100% {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        .sommaire ul {
+            list-style-type: none;
+            padding: 0;
+        }
+
+        .sommaire li {
+            margin: 1rem 0;
+        }
+
+        .sommaire a {
+            color: white;
+            text-decoration: none;
+            font-size: 1.2rem;
+        }
+
+        /* Style du lien de sommaire au survol */
+        .sommaire a:hover {
+            text-decoration: underline;
+        }
+
+        /* Effet de survol de l'entrée */
+        .entry {
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            background: rgba(0, 0, 0, 0.5);
+            z-index: 10;
+        }
+
+        .entry span {
+            color: white;
+            font-size: 2rem;
+            padding: 1rem;
+            border: 2px solid white;
+            border-radius: 8px;
+            cursor: pointer;
+            background-color: rgba(0, 0, 0, 0.7);
+        }
+
+    </style>
 </head>
 <body>
-    <header>
-        <nav>
-            <ul>
-                <li><a href="index.html">Accueil</a></li>
-                <li><a href="chap1.html">Chapitre 1</a></li>
-                <li><a href="chap2.html">Chapitre 2</a></li>
-                <li><a href="chap3.html">Chapitre 3</a></li>
-                <li><a href="chap4.html">Chapitre 4</a></li>
-            </ul>
-        </nav>
-    </header>
 
-    <main>
-        <div class="home-container">
-            <h1>Bienvenue dans l'histoire de Ryoma Uchiha</h1>
-            <p>Ryoma, un jeune Uchiha, a toujours su qu'il devait forger son propre destin. Découvrez son parcours...</p>
-            <a href="chap1.html" class="button">Commencer l'aventure</a>
-        </div>
-    </main>
+    <!-- Écran d'entrée -->
+    <div class="entry" id="entryScreen">
+        <span id="startButton">Appuyez n'importe où pour commencer</span>
+    </div>
+
+    <!-- Contenu de l'Histoire -->
+    <h1>Bienvenue dans l'Histoire de Ryoma</h1>
+
+    <!-- Sommaire -->
+    <div class="sommaire" id="sommaire">
+        <h2>Sommaire</h2>
+        <ul>
+            <li><a href="/home/chap1">Chapitre 1: Les débuts à Konoha</a></li>
+            <li><a href="/home/chap2">Chapitre 2: L'entraînement intense</a></li>
+            <li><a href="/home/chap3">Chapitre 3: Le premier défi</a></li>
+            <li><a href="/home/chap4">Chapitre 4: L'ultime affrontement</a></li>
+        </ul>
+    </div>
+
+    <script>
+        // Fonction pour afficher le sommaire quand on clique n'importe où
+        document.getElementById('startButton').addEventListener('click', function() {
+            // Masquer l'écran d'entrée
+            document.getElementById('entryScreen').style.display = 'none';
+            // Afficher le sommaire avec une animation
+            document.getElementById('sommaire').style.display = 'block';
+        });
+    </script>
+
 </body>
 </html>
+

@@ -1,59 +1,47 @@
-/* Body Styling */
+/* Style général */
 body {
-    font-family: 'Georgia', serif;
-    background-color: #f0f4f8;
-    color: #333;
+    font-family: 'Arial', sans-serif;
     margin: 0;
     padding: 0;
+    background-color: #121212;
+    color: #fff;
+    text-align: center;
+    overflow-x: hidden;
     height: 100vh;
+}
+
+/* Écran d'entrée */
+.entry {
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
     display: flex;
-    flex-direction: column;
     justify-content: center;
     align-items: center;
-    text-align: center;
-    overflow: hidden;
+    background-color: rgba(0, 0, 0, 0.8);
+    z-index: 10;
 }
 
-/* Animation de texte pour l'entrée */
-h1 {
-    font-size: 3rem;
-    color: #1d3557;
-    opacity: 0;
-    animation: fadeIn 3s forwards;
+.entry span {
+    font-size: 2rem;
+    color: #fff;
+    padding: 1rem;
+    border: 2px solid #fff;
+    border-radius: 8px;
+    cursor: pointer;
 }
 
-@keyframes fadeIn {
-    0% {
-        opacity: 0;
-        transform: translateY(-50px);
-    }
-    100% {
-        opacity: 1;
-        transform: translateY(0);
-    }
-}
-
-/* Animation pour le sommaire */
+/* Style du sommaire */
 .sommaire {
     display: none;
+    background-color: #1e1e1e;
     margin-top: 2rem;
-    background-color: #2a9d8f;
     padding: 1rem;
     width: 80%;
     border-radius: 8px;
     box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
-    animation: slideIn 1s forwards;
-}
-
-@keyframes slideIn {
-    0% {
-        opacity: 0;
-        transform: translateY(-50px);
-    }
-    100% {
-        opacity: 1;
-        transform: translateY(0);
-    }
 }
 
 .sommaire ul {
@@ -66,36 +54,51 @@ h1 {
 }
 
 .sommaire a {
-    color: white;
+    color: #a8dadc;
     text-decoration: none;
     font-size: 1.2rem;
 }
 
-/* Style du lien de sommaire au survol */
 .sommaire a:hover {
     text-decoration: underline;
 }
 
-/* Effet de survol de l'entrée */
-.entry {
-    position: absolute;
-    top: 0;
-    left: 0;
-    right: 0;
-    bottom: 0;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    background: rgba(0, 0, 0, 0.5);
-    z-index: 10;
+/* Chapitres */
+.chapitres {
+    margin-top: 3rem;
+    padding: 2rem;
 }
 
+section {
+    margin: 2rem 0;
+}
+
+/* Animation du bouton */
 .entry span {
-    color: white;
-    font-size: 2rem;
-    padding: 1rem;
-    border: 2px solid white;
-    border-radius: 8px;
-    cursor: pointer;
-    background-color: rgba(0, 0, 0, 0.7);
+    animation: fadeIn 1.5s ease-in-out;
+}
+
+@keyframes fadeIn {
+    0% {
+        opacity: 0;
+        transform: scale(0.8);
+    }
+    100% {
+        opacity: 1;
+        transform: scale(1);
+    }
+}
+
+/* Transition vers le sommaire */
+#sommaire {
+    animation: fadeIn 1s ease-in-out;
+}
+
+/* Mode sombre */
+body {
+    background-color: #121212;
+}
+
+h1, h2, p {
+    color: #e0e0e0;
 }

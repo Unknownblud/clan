@@ -3,41 +3,36 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Mon Histoire - Ryoma</title>
-    <link rel="stylesheet" href="style.css">
+    <title>Histoire de Ryoma</title>
+    <link rel="stylesheet" href="styles.css">
 </head>
 <body>
-    <!-- Écran d'entrée avec le message -->
-    <div id="entryScreen" class="entry">
-        <span id="startBtn">Appuyez n'importe où</span>
+    <div class="entry" id="entry-screen">
+        <p>Appuyez n'importe où</p>
     </div>
 
-    <!-- Sommaire -->
-    <div id="sommaire" class="sommaire">
+    <div id="sommaire" class="hidden">
+        <h2>Sommaire</h2>
         <ul>
-            <li><a href="#chapitre1">Chapitre 1 - L'enfance de Ryoma</a></li>
-            <li><a href="#chapitre2">Chapitre 2 - Son entraînement</a></li>
-            <li><a href="#chapitre3">Chapitre 3 - Le grand défi</a></li>
+            <li><a href="#chap1">Chapitre 1 - L'enfance de Ryoma</a></li>
+            <li><a href="#chap2">Chapitre 2 - Son entraînement</a></li>
+            <li><a href="#chap3">Chapitre 3 - Le grand défi</a></li>
         </ul>
     </div>
 
-    <!-- Chapitres -->
-    <div class="chapitres">
-        <section id="chapitre1">
-            <h2>Chapitre 1 - L'enfance de Ryoma</h2>
-            <p>Ryoma grandit à Konoha, où il rêvait de devenir un grand ninja. À l'âge de 10 ans, il se rendait souvent dans la forêt pour s'entraîner seul...</p>
-        </section>
-        <section id="chapitre2">
-            <h2>Chapitre 2 - Son entraînement</h2>
-            <p>À l'âge de 14 ans, Ryoma commença à suivre un entraînement rigoureux auprès des plus grands maîtres de Konoha...</p>
-        </section>
-        <section id="chapitre3">
-            <h2>Chapitre 3 - Le grand défi</h2>
-            <p>À l'adolescence, Ryoma se retrouva face à un défi de taille, un ennemi redoutable qui menaçait Konoha...</p>
-        </section>
+    <div id="chap1">
+        <h3>Chapitre 1 - L'enfance de Ryoma</h3>
+        <p>Ryoma grandit à Konoha, où il rêvait de devenir un grand ninja...</p>
+    </div>
+    <div id="chap2">
+        <h3>Chapitre 2 - Son entraînement</h3>
+        <p>À l'âge de 14 ans, Ryoma commença à suivre un entraînement rigoureux...</p>
+    </div>
+    <div id="chap3">
+        <h3>Chapitre 3 - Le grand défi</h3>
+        <p>À l'adolescence, Ryoma se retrouva face à un défi de taille...</p>
     </div>
 
     <script src="script.js"></script>
 </body>
 </html>
-

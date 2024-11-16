@@ -1,0 +1,101 @@
+/* Body Styling */
+body {
+    font-family: 'Georgia', serif;
+    background-color: #f0f4f8;
+    color: #333;
+    margin: 0;
+    padding: 0;
+    height: 100vh;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+    overflow: hidden;
+}
+
+/* Animation de texte pour l'entrée */
+h1 {
+    font-size: 3rem;
+    color: #1d3557;
+    opacity: 0;
+    animation: fadeIn 3s forwards;
+}
+
+@keyframes fadeIn {
+    0% {
+        opacity: 0;
+        transform: translateY(-50px);
+    }
+    100% {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+/* Animation pour le sommaire */
+.sommaire {
+    display: none;
+    margin-top: 2rem;
+    background-color: #2a9d8f;
+    padding: 1rem;
+    width: 80%;
+    border-radius: 8px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+    animation: slideIn 1s forwards;
+}
+
+@keyframes slideIn {
+    0% {
+        opacity: 0;
+        transform: translateY(-50px);
+    }
+    100% {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+.sommaire ul {
+    list-style-type: none;
+    padding: 0;
+}
+
+.sommaire li {
+    margin: 1rem 0;
+}
+
+.sommaire a {
+    color: white;
+    text-decoration: none;
+    font-size: 1.2rem;
+}
+
+/* Style du lien de sommaire au survol */
+.sommaire a:hover {
+    text-decoration: underline;
+}
+
+/* Effet de survol de l'entrée */
+.entry {
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background: rgba(0, 0, 0, 0.5);
+    z-index: 10;
+}
+
+.entry span {
+    color: white;
+    font-size: 2rem;
+    padding: 1rem;
+    border: 2px solid white;
+    border-radius: 8px;
+    cursor: pointer;
+    background-color: rgba(0, 0, 0, 0.7);
+}

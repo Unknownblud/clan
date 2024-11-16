@@ -1,16 +1,4 @@
 
-/* Style général */
-body {
-    font-family: 'Arial', sans-serif;
-    margin: 0;
-    padding: 0;
-    background-color: #121212;
-    color: #fff;
-    text-align: center;
-    overflow-x: hidden;
-    height: 100vh;
-}
-
 /* Écran d'entrée */
 .entry {
     position: absolute;
@@ -23,83 +11,35 @@ body {
     align-items: center;
     background-color: rgba(0, 0, 0, 0.8);
     z-index: 10;
+    animation: fadeOut 1s ease-out forwards;
 }
 
-.entry span {
-    font-size: 2rem;
-    color: #fff;
-    padding: 1rem;
-    border: 2px solid #fff;
-    border-radius: 8px;
-    cursor: pointer;
+/* Nouveau code : animation pour faire disparaître l'écran d'entrée */
+@keyframes fadeOut {
+    0% {
+        opacity: 1;
+    }
+    100% {
+        opacity: 0;
+        visibility: hidden;
+    }
 }
 
-/* Style du sommaire */
-.sommaire {
+/* Appliquer l'animation de disparition après un délai pour laisser le temps au clic */
+#sommaire {
     display: none;
-    background-color: #1e1e1e;
-    margin-top: 2rem;
-    padding: 1rem;
-    width: 80%;
-    border-radius: 8px;
-    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+    opacity: 0;
+    animation: fadeIn 1s ease-in-out 1s forwards; /* Délai d'animation */
 }
 
-.sommaire ul {
-    list-style-type: none;
-    padding: 0;
-}
-
-.sommaire li {
-    margin: 1rem 0;
-}
-
-.sommaire a {
-    color: #a8dadc;
-    text-decoration: none;
-    font-size: 1.2rem;
-}
-
-.sommaire a:hover {
-    text-decoration: underline;
-}
-
-/* Chapitres */
-.chapitres {
-    margin-top: 3rem;
-    padding: 2rem;
-}
-
-section {
-    margin: 2rem 0;
-}
-
-/* Animation du bouton */
-.entry span {
-    animation: fadeIn 1.5s ease-in-out;
-}
-
+/* Animation de transition pour l'apparition du sommaire */
 @keyframes fadeIn {
     0% {
         opacity: 0;
-        transform: scale(0.8);
+        transform: translateY(-20px);
     }
     100% {
         opacity: 1;
-        transform: scale(1);
+        transform: translateY(0);
     }
-}
-
-/* Transition vers le sommaire */
-#sommaire {
-    animation: fadeIn 1s ease-in-out;
-}
-
-/* Mode sombre */
-body {
-    background-color: #121212;
-}
-
-h1, h2, p {
-    color: #e0e0e0;
 }

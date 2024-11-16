@@ -1,5 +1,11 @@
+body {
+    font-family: 'Georgia', serif;
+    background-color: #333;
+    color: white;
+    margin: 0;
+    padding: 0;
+}
 
-/* Écran d'entrée */
 .entry {
     position: absolute;
     top: 0;
@@ -11,35 +17,40 @@
     align-items: center;
     background-color: rgba(0, 0, 0, 0.8);
     z-index: 10;
-    animation: fadeOut 1s ease-out forwards;
+    font-size: 2rem;
+    color: white;
 }
 
-/* Nouveau code : animation pour faire disparaître l'écran d'entrée */
-@keyframes fadeOut {
-    0% {
-        opacity: 1;
-    }
-    100% {
-        opacity: 0;
-        visibility: hidden;
-    }
-}
-
-/* Appliquer l'animation de disparition après un délai pour laisser le temps au clic */
-#sommaire {
+.hidden {
     display: none;
-    opacity: 0;
-    animation: fadeIn 1s ease-in-out 1s forwards; /* Délai d'animation */
 }
 
-/* Animation de transition pour l'apparition du sommaire */
-@keyframes fadeIn {
-    0% {
-        opacity: 0;
-        transform: translateY(-20px);
-    }
-    100% {
-        opacity: 1;
-        transform: translateY(0);
-    }
+#sommaire {
+    text-align: center;
+    margin-top: 50px;
+    opacity: 0;
+    transition: opacity 0.5s ease-in-out;
+    display: block;
+}
+
+#sommaire a {
+    color: #ddd;
+    text-decoration: none;
+}
+
+#sommaire a:hover {
+    color: #ff6347;
+}
+
+/* Chapitres */
+div[id^="chap"] {
+    margin: 50px 20px;
+    padding: 20px;
+    border: 1px solid #444;
+    background-color: #444;
+    border-radius: 5px;
+}
+
+h3 {
+    color: #ff6347;
 }

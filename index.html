@@ -8,9 +8,9 @@
     body {
       margin: 0;
       font-family: 'Georgia', serif;
-      background-image: url('arriere.png'); /* Ajouter l'image comme fond */
-      background-size: cover; /* L'image couvre tout l'arrière-plan */
-      background-position: center; /* Centrer l'image */
+      background-image: url('arriere.jpg');
+      background-size: cover;
+      background-position: center;
       color: white;
       height: 100vh;
       cursor: pointer;
@@ -18,16 +18,30 @@
       justify-content: center;
       align-items: center;
       text-align: center;
-      overflow: hidden; /* Empêcher le défilement à l'initial */
+      overflow: hidden;
     }
 
+    /* Le div contenant le texte "Appuyez n'importe où" */
     #intro {
       position: absolute;
       font-size: 24px;
+      color: white;
+      font-weight: bold;
       z-index: 10;
-      color: gray;
-      display: block; /* Initialement visible */
-      text-shadow: 6px 6px 12px black; /* Contour noir léger */
+      display: block;
+      text-shadow: 2px 2px 5px black; /* Contour noir pour le texte */
+    }
+
+    /* L'overlay qui couvre toute la page avant de passer au sommaire */
+    #overlay {
+      position: absolute;
+      top: 0;
+      left: 0;
+      right: 0;
+      bottom: 0;
+      background-color: rgba(0, 0, 0, 0.5); /* Assombrir un peu */
+      z-index: 5; /* Derrière le texte "Appuyez n'importe où" */
+      display: block; /* Visible au début */
     }
 
     #sommaire {
@@ -119,7 +133,10 @@
 </head>
 <body>
 
-  <!-- Intro - Appuyez n'importe où -->
+  <!-- Overlay noir avant le texte "Appuyez n'importe où" -->
+  <div id="overlay"></div>
+
+  <!-- Texte "Appuyez n'importe où" -->
   <div id="intro">
     <p>Appuyez n'importe où pour commencer</p>
   </div>
@@ -162,6 +179,7 @@
     // Affiche le sommaire après un clic
     document.body.addEventListener('click', () => {
       document.getElementById('intro').style.display = 'none';
+      document.getElementById('overlay').style.display = 'none'; // Masquer l'overlay
       document.getElementById('sommaire').classList.add('active');
     });
 

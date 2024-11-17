@@ -29,9 +29,6 @@
       animation: fadeIn 2s ease-in-out;
       width: 100%;
       padding: 20px;
-      background: #0073e6;
-      color: #fff;
-      border-radius: 10px;
     }
 
     #sommaire, #chapitre-content {
@@ -95,10 +92,23 @@
         opacity: 1;
       }
     }
+
+    /* Ajout d'une règle pour rendre toute la page cliquable sans changer la couleur de fond */
+    .clickable-area {
+      width: 100%;
+      height: 100%;
+      position: fixed;
+      top: 0;
+      left: 0;
+      z-index: 999;
+      cursor: pointer;
+    }
   </style>
 </head>
-<body onclick="afficherSommaire()">
-  <div id="introduction">Appuyez n'importe où pour commencer</div>
+<body>
+  <div id="introduction">
+    Appuyez n'importe où pour commencer
+  </div>
 
   <div id="sommaire">
     <h1>Sommaire</h1>
@@ -115,6 +125,8 @@
     <a href="#" class="btn-retour" onclick="retourSommaire()">Retour au sommaire</a>
   </div>
 
+  <div class="clickable-area" onclick="afficherSommaire()"></div>
+
   <script>
     const contenu = {
       chapitre1: "Bienvenue dans le premier chapitre. Ce chapitre aborde les bases.",
@@ -126,7 +138,7 @@
       document.getElementById('introduction').style.display = 'none';
       document.getElementById('sommaire').style.display = 'block';
       // Enlever l'événement de clic pour éviter de déclencher l'action plusieurs fois
-      document.body.removeAttribute('onclick');
+      document.querySelector('.clickable-area').removeAttribute('onclick');
     }
 
     function afficherChapitre(chapitre) {

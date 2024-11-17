@@ -7,8 +7,10 @@
   <style>
     body {
       margin: 0;
-      font-family: 'Georgia', serif; /* Police élégante et classique */
-      background-color: black;
+      font-family: 'Georgia', serif;
+      background-image: url('arriere.jpg'); /* Ajouter l'image comme fond */
+      background-size: cover; /* L'image couvre tout l'arrière-plan */
+      background-position: center; /* Centrer l'image */
       color: white;
       height: 100vh;
       cursor: pointer;
@@ -64,7 +66,7 @@
     }
 
     #chapitres a:hover {
-      transform: scale(1.1); /* Agrandir légèrement le texte */
+      transform: scale(1.1);
     }
 
     #chapitres a:focus {
@@ -113,12 +115,10 @@
 </head>
 <body>
 
-  <!-- Zone d'introduction avant le sommaire -->
   <div id="intro">
     <p>Appuyez n'importe où pour commencer</p>
   </div>
 
-  <!-- Zone du sommaire -->
   <div id="sommaire">
     <div id="chapitres">
       <p>Cliquez sur un chapitre pour ouvrir</p>
@@ -128,7 +128,6 @@
     </div>
   </div>
 
-  <!-- Zone de contenu des chapitres -->
   <div id="contenu">
     <div id="numeroChapitre"></div>
     <div id="histoire"></div>
@@ -138,7 +137,6 @@
   </div>
 
   <script>
-    // Données des chapitres
     const contenu = {
       chapitre1: {
         texte: "Bienvenue dans le premier chapitre. Ce chapitre aborde les bases.",
@@ -154,26 +152,19 @@
       }
     };
 
-    // Afficher le sommaire avec animation
     document.body.addEventListener('click', () => {
-      // Masquer le texte de l'introduction
       document.getElementById('intro').style.display = 'none';
-      // Afficher le sommaire
       document.getElementById('sommaire').classList.add('active');
     });
 
-    // Ouvrir un chapitre
     function ouvrirChapitre(chapitre) {
-      // Masquer le sommaire
       document.getElementById('sommaire').style.display = 'none';
-      // Afficher le contenu du chapitre
       const chapitreData = contenu[chapitre];
       document.getElementById('numeroChapitre').textContent = chapitreData.numero;
       document.getElementById('histoire').textContent = chapitreData.texte;
       document.getElementById('contenu').style.display = 'block';
     }
 
-    // Fermer le chapitre et revenir au sommaire
     function fermerChapitre() {
       document.getElementById('contenu').style.display = 'none';
       document.getElementById('sommaire').style.display = 'flex';

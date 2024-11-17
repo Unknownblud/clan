@@ -8,9 +8,9 @@
     body {
       margin: 0;
       font-family: 'Georgia', serif;
-      background-image: url('arriere.png'); /* Arrière-plan visible */
-      background-size: cover;
-      background-position: center;
+      background-image: url('arriere.jpg'); /* Ajouter l'image comme fond */
+      background-size: cover; /* L'image couvre tout l'arrière-plan */
+      background-position: center; /* Centrer l'image */
       color: white;
       height: 100vh;
       cursor: pointer;
@@ -18,18 +18,18 @@
       justify-content: center;
       align-items: center;
       text-align: center;
-      overflow: hidden;
+      overflow: hidden; /* Empêcher le défilement à l'initial */
     }
-    /* Texte "Appuyez n'importe où" */
+
     #intro {
       position: absolute;
       font-size: 24px;
-      color: red;
-      font-weight: bold;
-      text-shadow: 2px 2px 5px black; /* Contour noir pour le texte */
+      z-index: 10;
+      color: white;
+      display: block; /* Initialement visible */
+      text-shadow: 2px 2px 4px black; /* Contour noir léger */
     }
 
-    /* Le sommaire (chapitres) */
     #sommaire {
       position: fixed;
       top: 0;
@@ -119,9 +119,9 @@
 </head>
 <body>
 
-  <!-- L'overlay autour du texte "Appuyez n'importe où" -->
-  <div id="overlay">
-    <p id="intro">Appuyez n'importe où pour commencer</p>
+  <!-- Intro - Appuyez n'importe où -->
+  <div id="intro">
+    <p>Appuyez n'importe où pour commencer</p>
   </div>
 
   <!-- Sommaire - Caché au départ -->
@@ -163,7 +163,6 @@
     document.body.addEventListener('click', () => {
       document.getElementById('intro').style.display = 'none';
       document.getElementById('sommaire').classList.add('active');
-      document.getElementById('overlay').style.display = 'none'; // Masquer l'overlay une fois le clic
     });
 
     function ouvrirChapitre(chapitre) {

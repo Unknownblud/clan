@@ -8,9 +8,9 @@
     body {
       margin: 0;
       font-family: 'Georgia', serif;
-      background-image: url('arriere.png'); /* Ajouter l'image comme fond */
-      background-size: cover; /* L'image couvre tout l'arrière-plan */
-      background-position: center; /* Centrer l'image */
+      background-image: url('arriere.png'); /* Arrière-plan visible */
+      background-size: cover;
+      background-position: center;
       color: white;
       height: 100vh;
       cursor: pointer;
@@ -18,18 +18,23 @@
       justify-content: center;
       align-items: center;
       text-align: center;
-      overflow: hidden; /* Empêcher le défilement à l'initial */
+      overflow: hidden;
     }
 
+    /* Texte "Appuyez n'importe où" en haut de la page */
     #intro {
       position: absolute;
+      top: 20px; /* Ajuste cette valeur pour déplacer le texte vers le haut */
+      left: 50%;
+      transform: translateX(-50%); /* Centrer horizontalement */
       font-size: 24px;
-      z-index: 10;
-      color: black;
-      display: block; /* Initialement visible */
-      text-shadow: 2px 2px 4px red; /* Contour léger */
+      color: white;
+      font-weight: bold;
+      z-index: 1; /* Texte au-dessus de l'overlay */
+      text-shadow: 2px 2px 5px black; /* Contour noir pour le texte */
     }
 
+    /* Le sommaire (chapitres) */
     #sommaire {
       position: fixed;
       top: 0;
@@ -119,7 +124,7 @@
 </head>
 <body>
 
-  <!-- Intro - Appuyez n'importe où -->
+  <!-- Texte "Appuyez n'importe où" en haut de la page -->
   <div id="intro">
     <p>Appuyez n'importe où pour commencer</p>
   </div>

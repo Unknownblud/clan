@@ -12,6 +12,16 @@
       color: white;
       height: 100vh;
       cursor: pointer;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      text-align: center;
+    }
+
+    #intro {
+      position: absolute;
+      font-size: 24px;
+      z-index: 10;
     }
 
     #sommaire {
@@ -91,10 +101,15 @@
 </head>
 <body>
 
+  <!-- Zone d'introduction avant le sommaire -->
+  <div id="intro">
+    <p>Appuyez n'importe où pour commencer</p>
+  </div>
+
   <!-- Zone du sommaire -->
   <div id="sommaire">
     <div id="chapitres">
-      <p>Cliquez n'importe où pour ouvrir le sommaire</p>
+      <p>Cliquez sur un chapitre pour ouvrir</p>
       <a href="#" onclick="ouvrirChapitre('chapitre1')">Chapitre 1</a>
       <a href="#" onclick="ouvrirChapitre('chapitre2')">Chapitre 2</a>
       <a href="#" onclick="ouvrirChapitre('chapitre3')">Chapitre 3</a>
@@ -125,6 +140,9 @@
 
     // Afficher le sommaire avec animation
     document.body.addEventListener('click', () => {
+      // Masquer le texte de l'introduction
+      document.getElementById('intro').style.display = 'none';
+      // Afficher le sommaire
       document.getElementById('sommaire').classList.add('active');
     });
 

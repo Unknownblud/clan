@@ -3,18 +3,19 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Appuyez n'importe où</title>
+    <title>Sommaire interactif</title>
     <link rel="stylesheet" href="styles.css">
 </head>
 <body>
-    <div class="entry">
-        <p id="clickable">Appuyez n'importe où</p>
+    <div class="container">
+        <div id="message">Appuyez sur n'importe quelle touche pour continuer...</div>
+        <div id="sommaire" class="hidden">
+            <div class="item">001 - Introduction</div>
+            <div class="item">002 - Chapitre 1 : Les bases</div>
+            <div class="item">003 - Chapitre 2 : Concepts avancés</div>
+            <div class="item">004 - Conclusion</div>
+        </div>
     </div>
-
-    <script>
-        document.getElementById('clickable').addEventListener('click', function() {
-            window.location.href = "sommaire.html"; // Redirection vers la page sommaire.html
-        });
-    </script>
+    <script src="script.js"></script>
 </body>
 </html>

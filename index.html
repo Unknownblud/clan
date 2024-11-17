@@ -21,73 +21,60 @@
       overflow: hidden;
     }
 
-    /* Le texte 'Appuyez' */
-    #appuyez {
-      position: absolute;
-      top: 50%;
-      left: 50%;
-      transform: translate(-50%, -50%);
-      font-size: 28px;
-      font-weight: bold;
-      color: white;
-      text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.7); /* Contour noir léger */
-      cursor: pointer;
-      opacity: 1;
-      transition: opacity 1s ease;
-    }
-
     /* Le sommaire (chapitres) */
     #sommaire {
       position: fixed;
-      top: 0;
-      left: 0;
-      right: 0;
-      bottom: 0;
-      display: none;
+      top: 50%;
+      left: 50%;
+      transform: translate(-50%, -50%) translateY(50px); /* Commence légèrement en bas */
+      display: none; /* Initialement caché */
       justify-content: center;
       align-items: center;
-      background-color: rgba(0, 0, 0, 0.9);
+      background-color: rgba(0, 0, 0, 0.8); /* Noir transparent */
       opacity: 0;
-      transition: opacity 0.5s ease-in-out;
+      border-radius: 12px;
+      padding: 20px;
+      transition: opacity 1s ease, transform 1s ease; /* Animation fluide */
     }
 
     #sommaire.active {
-      display: flex;
+      display: flex; /* Le sommaire devient visible */
       opacity: 1;
-    }
-
-    #chapitres {
-      text-align: center;
+      transform: translate(-50%, -50%) translateY(0); /* Arrive à sa position finale */
     }
 
     #chapitres p {
       color: white;
       font-size: 20px;
+      margin-bottom: 15px;
     }
 
     #chapitres a {
       display: block;
-      padding: 10px;
+      padding: 10px 15px;
       margin: 10px;
       color: white;
       text-decoration: none;
       font-size: 18px;
       font-weight: bold;
-      transition: transform 0.2s ease;
+      transition: background-color 0.3s ease, transform 0.2s ease;
     }
 
     #chapitres a:hover {
       transform: scale(1.1);
+      background-color: rgba(255, 255, 255, 0.2);
     }
 
+    /* Contenu des chapitres */
     #contenu {
       display: none;
       padding: 20px;
-      background-color: rgba(0, 0, 0, 0.7); /* Fond noir transparent */
-      border-radius: 8px;
+      background-color: rgba(0, 0, 0, 0.8); /* Noir transparent */
+      border-radius: 12px;
       color: white;
       margin: 20px;
       text-align: center;
+      max-width: 80%;
     }
 
     #contenu #numeroChapitre {
@@ -113,7 +100,7 @@
       font-size: 16px;
       cursor: pointer;
       transition: background-color 0.3s ease;
-      border-radius: 8px;
+      border-radius: 12px; /* Coins arrondis */
     }
 
     #retour button:hover {
@@ -122,12 +109,10 @@
   </style>
 </head>
 <body>
-
-  <!-- Intro - Appuyez n'importe où -->
-  <div id="appuyez">
+  <!-- Texte "Appuyez n'importe où" en haut de la page -->
+  <div id="intro">
     <p>Appuyez n'importe où pour commencer</p>
   </div>
-
   <!-- Sommaire - Caché au départ -->
   <div id="sommaire">
     <div id="chapitres">
@@ -143,7 +128,7 @@
     <div id="numeroChapitre"></div>
     <div id="histoire"></div>
     <div id="retour">
-      <button onclick="fermerChapitre()">Retour au sommaire</button>
+      <button onclick="retournerSommaire()">Retour au sommaire</button>
     </div>
   </div>
 
@@ -165,29 +150,40 @@
 
     // Affiche le sommaire après un clic
     document.body.addEventListener('click', () => {
-      // Si le texte 'Appuyez' est visible, le cacher et afficher le sommaire
-      if (document.getElementById('appuyez').style.display !== 'none') {
-        document.getElementById('appuyez').style.display = 'none';
-        document.getElementById('sommaire').classList.add('active');
+      const intro = document.getElementById('intro');
+      if (intro) intro.style.display = 'none';
+
+      const sommaire = document.getElementById('sommaire');
+      if (!sommaire.classList.contains('active')) {
+        sommaire.style.display = 'flex';
+        requestAnimationFrame(() => {
+          sommaire.classList.add('active'); // Activation de l'animation
+        });
       }
     });
 
     function ouvrirChapitre(chapitre) {
-      // Ferme le sommaire et affiche le chapitre
-      document.getElementById('sommaire').style.display = 'none';
+      const sommaire = document.getElementById('sommaire');
+      sommaire.style.display = 'none'; // Cache le sommaire
+
       const chapitreData = contenu[chapitre];
       document.getElementById('numeroChapitre').textContent = chapitreData.numero;
       document.getElementById('histoire').textContent = chapitreData.texte;
-      document.getElementById('contenu').style.display = 'block';
+
+      const contenuDiv = document.getElementById('contenu');
+      contenuDiv.style.display = 'block'; // Montre le contenu du chapitre
     }
 
-    function fermerChapitre() {
-      // Ferme le chapitre et réaffiche le sommaire
-      document.getElementById('contenu').style.display = 'none';
-      document.getElementById('sommaire').style.display = 'flex';
-      document.getElementById('sommaire').classList.remove('active');
+    function retournerSommaire() {
+      const contenuDiv = document.getElementById('contenu');
+      contenuDiv.style.display = 'none'; // Cache le contenu du chapitre
+
+      const sommaire = document.getElementById('sommaire');
+      sommaire.style.display = 'flex'; // Montre le sommaire
+      sommaire.classList.add('active'); // Réapplique l'animation
     }
   </script>
 
 </body>
 </html>
+

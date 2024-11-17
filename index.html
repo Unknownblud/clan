@@ -8,7 +8,7 @@
     body {
       margin: 0;
       font-family: 'Georgia', serif;
-      background-image: url('arriere.png'); /* Arrière-plan visible */
+      background-image: url('arriere.png'); /* Arrière-plan général visible */
       background-size: cover;
       background-position: center;
       color: white;
@@ -20,17 +20,18 @@
       text-align: center;
       overflow: hidden;
     }
+
     /* Texte "Appuyez n'importe où" en haut de la page */
     #intro {
       position: absolute;
-      top: 20px; /* Ajuste cette valeur pour déplacer le texte vers le haut */
+      top: 20px;
       left: 50%;
-      transform: translateX(-50%); /* Centrer horizontalement */
+      transform: translateX(-50%);
       font-size: 24px;
       color: white;
       font-weight: bold;
-      z-index: 1; /* Texte au-dessus de l'overlay */
-      text-shadow: 2px 2px 5px black; /* Contour noir pour le texte */
+      z-index: 1;
+      text-shadow: 2px 2px 5px black;
     }
 
     /* Le sommaire (chapitres) */
@@ -38,21 +39,21 @@
       position: fixed;
       top: 50%;
       left: 50%;
-      transform: translate(-50%, -50%) translateY(50px); /* Commence légèrement en bas */
-      display: none; /* Initialement caché */
+      transform: translate(-50%, -50%) translateY(50px);
+      display: none;
       justify-content: center;
       align-items: center;
-      background-color: rgba(0, 0, 0, 0.8); /* Noir transparent */
+      background-color: rgba(0, 0, 0, 0.8);
       opacity: 0;
       border-radius: 12px;
       padding: 20px;
-      transition: opacity 1s ease, transform 1s ease; /* Animation fluide */
+      transition: opacity 1s ease, transform 1s ease;
     }
 
     #sommaire.active {
-      display: flex; /* Le sommaire devient visible */
+      display: flex;
       opacity: 1;
-      transform: translate(-50%, -50%) translateY(0); /* Arrive à sa position finale */
+      transform: translate(-50%, -50%) translateY(0);
     }
 
     #chapitres p {
@@ -81,7 +82,7 @@
     #contenu {
       display: none;
       padding: 20px;
-      background-color: rgba(0, 0, 0, 0.8); /* Noir transparent */
+      background-color: rgba(0, 0, 0, 0.8);
       border-radius: 12px;
       color: white;
       margin: 20px;
@@ -112,7 +113,7 @@
       font-size: 16px;
       cursor: pointer;
       transition: background-color 0.3s ease;
-      border-radius: 12px; /* Coins arrondis */
+      border-radius: 12px;
     }
 
     #retour button:hover {
@@ -121,11 +122,9 @@
   </style>
 </head>
 <body>
-  <!-- Texte "Appuyez n'importe où" en haut de la page -->
   <div id="intro">
     <p>Appuyez n'importe où pour commencer</p>
   </div>
-  <!-- Sommaire - Caché au départ -->
   <div id="sommaire">
     <div id="chapitres">
       <p>Cliquez sur un chapitre pour ouvrir</p>
@@ -137,10 +136,12 @@
     </div>
   </div>
 
-  <!-- Contenu des chapitres -->
   <div id="contenu">
     <div id="numeroChapitre"></div>
     <div id="histoire"></div>
+    <div id="imageChapitre" style="margin: 20px;">
+      <img src="" alt="Image Chapitre" id="chapitreImage" style="max-width: 100%; border-radius: 12px;">
+    </div>
     <div id="retour">
       <button onclick="retournerSommaire()">Retour au sommaire</button>
     </div>
@@ -151,31 +152,31 @@
       chapitre1: {
         texte: "Voici l'histoire du chapitre 1, qui parle des bases...",
         numero: "Chapitre 1",
-        image: "imageChapitre1.jpg", 
+        image: "imageChapitre1.jpg",
         arrierePlan: "arriere1.jpg"
       },
       chapitre2: {
         texte: "Voici l'histoire du chapitre 2, qui parle des concepts avancés...",
         numero: "Chapitre 2",
-        image: "imageChapitre2.jpg", 
+        image: "imageChapitre2.jpg",
         arrierePlan: "arriere2.jpg"
       },
       chapitre3: {
         texte: "Voici l'histoire du chapitre 3, qui parle des techniques intermédiaires...",
         numero: "Chapitre 3",
-        image: "imageChapitre3.jpg", 
+        image: "imageChapitre3.jpg",
         arrierePlan: "arriere3.jpg"
       },
       chapitre4: {
         texte: "Voici l'histoire du chapitre 4, qui parle des stratégies avancées...",
         numero: "Chapitre 4",
-        image: "imageChapitre4.jpg", 
+        image: "imageChapitre4.jpg",
         arrierePlan: "arriere4.jpg"
       },
       chapitre5: {
         texte: "Voici l'histoire du chapitre 5, qui parle des projets concrets...",
         numero: "Chapitre 5",
-        image: "imageChapitre5.jpg", 
+        image: "imageChapitre5.jpg",
         arrierePlan: "arriere5.jpg"
       }
     };
@@ -189,7 +190,7 @@
       if (!sommaire.classList.contains('active')) {
         sommaire.style.display = 'flex';
         requestAnimationFrame(() => {
-          sommaire.classList.add('active'); // Activation de l'animation
+          sommaire.classList.add('active');
         });
       }
     });
@@ -201,10 +202,13 @@
       const chapitreData = contenu[chapitre];
       document.getElementById('numeroChapitre').textContent = chapitreData.numero;
       document.getElementById('histoire').textContent = chapitreData.texte;
+      document.getElementById('chapitreImage').src = chapitreData.image;
+
+      // Changer l'arrière-plan
+      document.body.style.backgroundImage = `url('${chapitreData.arrierePlan}')`;
 
       const contenuDiv = document.getElementById('contenu');
       contenuDiv.style.display = 'block'; // Montre le contenu du chapitre
-      // Vous pouvez ajouter l'image et l'arrière-plan ici si nécessaire
     }
 
     function retournerSommaire() {
@@ -213,7 +217,10 @@
 
       const sommaire = document.getElementById('sommaire');
       sommaire.style.display = 'flex'; // Montre le sommaire
-      sommaire.classList.add('active'); // Réapplique l'animation
+      sommaire.classList.add('active');
+      
+      // Remettre l'arrière-plan initial
+      document.body.style.backgroundImage = "url('arriere.png')";
     }
   </script>
 

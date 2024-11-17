@@ -13,7 +13,6 @@
       background-position: center;
       color: white;
       height: 100vh;
-      cursor: pointer;
       display: flex;
       justify-content: center;
       align-items: center;
@@ -47,7 +46,7 @@
       opacity: 0;
       border-radius: 12px;
       padding: 20px;
-      transition: opacity 1s ease, transform 1s ease;
+      transition: opacity 0.5s ease, transform 0.5s ease;
     }
 
     #sommaire.active {
@@ -70,12 +69,13 @@
       text-decoration: none;
       font-size: 18px;
       font-weight: bold;
-      transition: background-color 0.3s ease, transform 0.2s ease;
+      opacity: 0;
+      transition: opacity 1s ease;
     }
 
-    #chapitres a:hover {
-      transform: scale(1.1);
-      background-color: rgba(255, 255, 255, 0.2);
+    /* Animation pour faire apparaître les liens des chapitres */
+    #chapitres a.active {
+      opacity: 1;
     }
 
     /* Contenu des chapitres */
@@ -88,16 +88,33 @@
       margin: 20px;
       text-align: center;
       max-width: 80%;
+      opacity: 0;
+      transition: opacity 1s ease;
     }
 
-    #contenu #numeroChapitre {
+    #contenu.active {
+      display: block;
+      opacity: 1;
+    }
+
+    #numeroChapitre {
       font-size: 30px;
       font-weight: bold;
       margin-bottom: 20px;
     }
 
-    #contenu #histoire {
+    #histoire {
       font-size: 20px;
+    }
+
+    #imageChapitre {
+      margin: 20px;
+      opacity: 0;
+      transition: opacity 1s ease;
+    }
+
+    #imageChapitre.active {
+      opacity: 1;
     }
 
     #retour {
@@ -139,7 +156,7 @@
   <div id="contenu">
     <div id="numeroChapitre"></div>
     <div id="histoire"></div>
-    <div id="imageChapitre" style="margin: 20px;">
+    <div id="imageChapitre">
       <img src="" alt="Image Chapitre" id="chapitreImage" style="max-width: 100%; border-radius: 12px;">
     </div>
     <div id="retour">
@@ -193,6 +210,14 @@
           sommaire.classList.add('active');
         });
       }
+
+      // Affiche les liens du sommaire avec animation
+      const chapitresLinks = document.querySelectorAll('#chapitres a');
+      chapitresLinks.forEach((link, index) => {
+        setTimeout(() => {
+          link.classList.add('active');
+        }, 200 * index); // Décale l'animation de chaque lien
+      });
     });
 
     function ouvrirChapitre(chapitre) {
@@ -202,27 +227,29 @@
       const chapitreData = contenu[chapitre];
       document.getElementById('numeroChapitre').textContent = chapitreData.numero;
       document.getElementById('histoire').textContent = chapitreData.texte;
-      document.getElementById('chapitreImage').src = chapitreData.image;
+      const chapitreImage = document.getElementById('chapitreImage');
+      chapitreImage.src = chapitreData.image;
 
-      // Changer l'arrière-plan
-      document.body.style.backgroundImage = `url('${chapitreData.arrierePlan}')`;
+      const contenuChapitre = document.getElementById('contenu');
+      contenuChapitre.classList.add('active');
 
-      const contenuDiv = document.getElementById('contenu');
-      contenuDiv.style.display = 'block'; // Montre le contenu du chapitre
+      // Changer l'arrière-plan du body
+      document.body.style.backgroundImage = `url(${chapitreData.arrierePlan})`;
+      
+      // Ajouter l'image du chapitre avec transition
+      const imageChapitre = document.getElementById('imageChapitre');
+      imageChapitre.classList.add('active');
     }
 
     function retournerSommaire() {
-      const contenuDiv = document.getElementById('contenu');
-      contenuDiv.style.display = 'none'; // Cache le contenu du chapitre
-
+      const contenuChapitre = document.getElementById('contenu');
+      contenuChapitre.classList.remove('active');
       const sommaire = document.getElementById('sommaire');
-      sommaire.style.display = 'flex'; // Montre le sommaire
-      sommaire.classList.add('active');
-      
-      // Remettre l'arrière-plan initial
-      document.body.style.backgroundImage = "url('arriere.png')";
+      sommaire.style.display = 'flex';
+      requestAnimationFrame(() => {
+        sommaire.classList.add('active');
+      });
     }
   </script>
-
 </body>
 </html>

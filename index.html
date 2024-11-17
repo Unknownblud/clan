@@ -120,6 +120,11 @@
     #sommaire {
       animation: slideIn 1s ease-out;
     }
+
+    /* Empêcher la zone cliquable d'interférer avec les liens du sommaire */
+    .active-clickable {
+      pointer-events: none;
+    }
   </style>
 </head>
 <body>
@@ -155,7 +160,7 @@
       document.getElementById('introduction').style.display = 'none';
       document.getElementById('sommaire').style.display = 'block';
       // Enlever l'événement de clic pour éviter de déclencher l'action plusieurs fois
-      document.querySelector('.clickable-area').removeAttribute('onclick');
+      document.querySelector('.clickable-area').classList.add('active-clickable');
     }
 
     function afficherChapitre(chapitre) {
@@ -168,6 +173,8 @@
     function retourSommaire() {
       document.getElementById('chapitre-content').style.display = 'none';
       document.getElementById('sommaire').style.display = 'block';
+      // Réactiver la zone cliquable
+      document.querySelector('.clickable-area').classList.remove('active-clickable');
     }
   </script>
 </body>

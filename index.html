@@ -94,14 +94,14 @@
     }
 
     /* Animation pour faire apparaître le sommaire */
-    @keyframes slideIn {
+    @keyframes fadeInSommaire {
       from {
-        transform: translateY(-100%);
         opacity: 0;
+        transform: scale(0.8);
       }
       to {
-        transform: translateY(0);
         opacity: 1;
+        transform: scale(1);
       }
     }
 
@@ -118,12 +118,18 @@
 
     /* Animation du sommaire */
     #sommaire {
-      animation: slideIn 1s ease-out;
+      animation: fadeInSommaire 1s ease-out;
     }
 
     /* Empêcher la zone cliquable d'interférer avec les liens du sommaire */
     .active-clickable {
       pointer-events: none;
+    }
+
+    /* Animation pour agrandir légèrement le texte lorsqu'il est survolé */
+    #sommaire a:hover {
+      font-size: 1.6rem; /* Le texte devient légèrement plus grand */
+      color: #005bb5;
     }
   </style>
 </head>

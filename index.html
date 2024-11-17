@@ -1,111 +1,202 @@
 <!DOCTYPE html>
 <html lang="fr">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Sommaire avec Animation</title>
-    <style>
-        body {
-            font-family: 'Georgia', serif;
-            margin: 0;
-            padding: 0;
-            height: 100vh;
-            overflow: hidden;
-            background-image: url('arriere.jpg');
-            background-size: cover;
-            background-position: center;
-        }
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Sommaire avec Animation</title>
+  <style>
+    body {
+      margin: 0;
+      font-family: 'Georgia', serif;
+      background-image: url('arriere.jpg'); /* Ajouter l'image comme fond */
+      background-size: cover; /* L'image couvre tout l'arrière-plan */
+      background-position: center; /* Centrer l'image */
+      color: white;
+      height: 100vh;
+      cursor: pointer;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      text-align: center;
+      overflow: hidden; /* Empêcher le défilement à l'initial */
+    }
 
-        #overlay {
-            position: absolute;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            background: rgba(0, 0, 0, 0.7);
-            opacity: 0;
-            pointer-events: none;
-            transition: opacity 0.5s ease;
-        }
+    #intro {
+      position: absolute;
+      font-size: 24px;
+      z-index: 10;
+      color: white;
+      display: block; /* Initialement visible */
+    }
 
-        .clickable {
-            position: absolute;
-            top: 50%;
-            left: 50%;
-            transform: translate(-50%, -50%);
-            color: white;
-            font-size: 2em;
-            text-align: center;
-            cursor: pointer;
-            transition: font-size 0.2s;
-        }
+    #sommaire {
+      position: fixed;
+      top: 0;
+      left: 0;
+      right: 0;
+      bottom: 0;
+      display: none;
+      justify-content: center;
+      align-items: center;
+      background-color: rgba(0, 0, 0, 0.9);
+      opacity: 0;
+      transition: opacity 0.5s ease-in-out;
+    }
 
-        .clickable:hover {
-            font-size: 2.5em;
-        }
+    #sommaire.active {
+      display: flex;
+      opacity: 1;
+    }
 
-        .content {
-            display: none;
-            text-align: center;
-            position: relative;
-            padding: 20px;
-            color: white;
-            font-size: 1.2em;
-        }
+    #chapitres {
+      text-align: center;
+    }
 
-        .chapter {
-            margin-top: 20px;
-        }
+    #chapitres p {
+      color: white;
+      font-size: 20px;
+    }
 
-        .chapter a {
-            color: white;
-            text-decoration: none;
-            font-size: 1.2em;
-        }
+    #chapitres a {
+      display: block;
+      padding: 10px;
+      margin: 10px;
+      color: white;
+      text-decoration: none;
+      font-size: 18px;
+      font-weight: bold;
+      transition: transform 0.2s ease;
+    }
 
-        .chapter a:hover {
-            color: #ccc;
-        }
-    </style>
+    #chapitres a:hover {
+      transform: scale(1.1);
+    }
+
+    #chapitres a:focus {
+      outline: none;
+    }
+
+    #contenu {
+      display: none;
+      padding: 20px;
+      background-color: #333;
+      border-radius: 8px;
+      color: white;
+      margin: 20px;
+      text-align: center;
+    }
+
+    #contenu #numeroChapitre {
+      font-size: 30px;
+      font-weight: bold;
+      margin-bottom: 20px;
+    }
+
+    #contenu #histoire {
+      font-size: 20px;
+    }
+
+    #retour {
+      margin-top: 20px;
+      text-align: center;
+    }
+
+    #retour button {
+      background-color: #444;
+      color: white;
+      border: none;
+      padding: 10px;
+      font-size: 16px;
+      cursor: pointer;
+      transition: background-color 0.3s ease;
+    }
+
+    #retour button:hover {
+      background-color: #666;
+    }
+
+    /* Ajout d'un effet d'assombrissement pour les chapitres */
+    .assombrir {
+      background-color: rgba(0, 0, 0, 0.8); /* Arrière-plan légèrement assombri */
+      position: fixed;
+      top: 0;
+      left: 0;
+      right: 0;
+      bottom: 0;
+      z-index: 5; /* Placer l'effet en dessous du contenu du chapitre */
+      display: block;
+    }
+
+  </style>
 </head>
 <body>
 
-    <div id="overlay"></div>
-    <div class="clickable" id="clickToStart">Appuyez n'importe où</div>
+  <!-- Intro - Appuyez n'importe où -->
+  <div id="intro">
+    <p>Appuyez n'importe où pour commencer</p>
+  </div>
 
-    <div class="content" id="content">
-        <div class="chapter" id="chapter1">
-            <h2>Chapitre 1</h2>
-            <p>Voici l'histoire du chapitre 1. Des événements passionnants se déroulent ici.</p>
-            <a href="#" onclick="showChapter('chapter2')">Chapitre suivant</a>
-        </div>
-
-        <div class="chapter" id="chapter2" style="display: none;">
-            <h2>Chapitre 2</h2>
-            <p>Le chapitre 2 commence maintenant. Des révélations mystérieuses se produisent...</p>
-            <a href="#" onclick="showChapter('chapter1')">Retour au chapitre 1</a>
-        </div>
+  <!-- Sommaire - Caché au départ -->
+  <div id="sommaire">
+    <div id="chapitres">
+      <p>Cliquez sur un chapitre pour ouvrir</p>
+      <a href="#" onclick="ouvrirChapitre('chapitre1')">Chapitre 1</a>
+      <a href="#" onclick="ouvrirChapitre('chapitre2')">Chapitre 2</a>
+      <a href="#" onclick="ouvrirChapitre('chapitre3')">Chapitre 3</a>
     </div>
+  </div>
 
-    <script>
-        // Lorsque l'utilisateur clique pour afficher le contenu
-        document.getElementById('clickToStart').addEventListener('click', function() {
-            // Assombrir l'arrière-plan
-            document.getElementById('overlay').style.opacity = 1;
-            // Afficher le contenu
-            document.getElementById('content').style.display = 'block';
-            // Cacher le bouton de démarrage
-            document.getElementById('clickToStart').style.display = 'none';
-        });
+  <!-- Contenu des chapitres -->
+  <div id="contenu">
+    <div id="numeroChapitre"></div>
+    <div id="histoire"></div>
+    <div id="retour">
+      <button onclick="fermerChapitre()">Retour au sommaire</button>
+    </div>
+  </div>
 
-        function showChapter(chapterId) {
-            var allChapters = document.querySelectorAll('.chapter');
-            for (var i = 0; i < allChapters.length; i++) {
-                allChapters[i].style.display = 'none';
-            }
+  <script>
+    const contenu = {
+      chapitre1: {
+        texte: "Bienvenue dans le premier chapitre. Ce chapitre aborde les bases.",
+        numero: "Chapitre 1"
+      },
+      chapitre2: {
+        texte: "Ce deuxième chapitre développe les concepts avancés.",
+        numero: "Chapitre 2"
+      },
+      chapitre3: {
+        texte: "Enfin, ce dernier chapitre conclut nos apprentissages.",
+        numero: "Chapitre 3"
+      }
+    };
 
-            document.getElementById(chapterId).style.display = 'block';
-        }
-    </script>
+    // Affiche le sommaire après un clic
+    document.body.addEventListener('click', () => {
+      document.getElementById('intro').style.display = 'none';
+      document.getElementById('sommaire').classList.add('active');
+    });
+
+    function ouvrirChapitre(chapitre) {
+      document.getElementById('sommaire').style.display = 'none';
+      const chapitreData = contenu[chapitre];
+      document.getElementById('numeroChapitre').textContent = chapitreData.numero;
+      document.getElementById('histoire').textContent = chapitreData.texte;
+      document.getElementById('contenu').style.display = 'block';
+
+      // Appliquer l'effet d'assombrissement
+      document.body.classList.add('assombrir');
+    }
+
+    function fermerChapitre() {
+      document.getElementById('contenu').style.display = 'none';
+      document.getElementById('sommaire').style.display = 'flex';
+      document.getElementById('sommaire').classList.remove('active');
+
+      // Enlever l'effet d'assombrissement
+      document.body.classList.remove('assombrir');
+    }
+  </script>
+
 </body>
 </html>

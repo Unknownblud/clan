@@ -3,218 +3,73 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Sommaire Immersif</title>
-  <style>
-    body {
-      margin: 0;
-      font-family: 'Georgia', serif;
-      background-image: url('arriere.png'); /* Arrière-plan visible */
-      background-size: cover;
-      background-position: center;
-      color: white;
-      height: 100vh;
-      cursor: pointer;
-      display: flex;
-      justify-content: center;
-      align-items: center;
-      text-align: center;
-      overflow: hidden;
-    }
-    /* Texte "Appuyez n'importe où" en haut de la page */
-    #intro {
-      position: absolute;
-      top: 20px; /* Ajuste cette valeur pour déplacer le texte vers le haut */
-      left: 50%;
-      transform: translateX(-50%); /* Centrer horizontalement */
-      font-size: 24px;
-      color: white;
-      font-weight: bold;
-      z-index: 1; /* Texte au-dessus de l'overlay */
-      text-shadow: 2px 2px 5px black; /* Contour noir pour le texte */
-    }
-
-
-    /* Le sommaire (chapitres) */
-    #sommaire {
-      position: fixed;
-      top: 50%;
-      left: 50%;
-      transform: translate(-50%, -50%) translateY(50px); /* Commence légèrement en bas */
-      display: none; /* Initialement caché */
-      justify-content: center;
-      align-items: center;
-      background-color: rgba(0, 0, 0, 0.8); /* Noir transparent */
-      opacity: 0;
-      border-radius: 12px;
-      padding: 20px;
-      transition: opacity 1s ease, transform 1s ease; /* Animation fluide */
-    }
-
-    #sommaire.active {
-      display: flex; /* Le sommaire devient visible */
-      opacity: 1;
-      transform: translate(-50%, -50%) translateY(0); /* Arrive à sa position finale */
-    }
-
-    #chapitres p {
-      color: white;
-      font-size: 20px;
-      margin-bottom: 15px;
-    }
-
-    #chapitres a {
-      display: block;
-      padding: 10px 15px;
-      margin: 10px;
-      color: white;
-      text-decoration: none;
-      font-size: 18px;
-      font-weight: bold;
-      transition: background-color 0.3s ease, transform 0.2s ease;
-    }
-
-    #chapitres a:hover {
-      transform: scale(1.1);
-      background-color: rgba(255, 255, 255, 0.2);
-    }
-
-    /* Contenu des chapitres */
-    #contenu {
-      display: none;
-      padding: 20px;
-      background-color: rgba(0, 0, 0, 0.8); /* Noir transparent */
-      border-radius: 12px;
-      color: white;
-      margin: 20px;
-      text-align: center;
-      max-width: 80%;
-    }
-
-    #contenu #numeroChapitre {
-      font-size: 30px;
-      font-weight: bold;
-      margin-bottom: 20px;
-    }
-
-    #contenu #histoire {
-      font-size: 20px;
-    }
-
-    #retour {
-      margin-top: 20px;
-      text-align: center;
-    }
-
-    #retour button {
-      background-color: #444;
-      color: white;
-      border: none;
-      padding: 10px;
-      font-size: 16px;
-      cursor: pointer;
-      transition: background-color 0.3s ease;
-      border-radius: 12px; /* Coins arrondis */
-    }
-
-    #retour button:hover {
-      background-color: #666;
-    }
-  </style>
+  <title>Chapitre Immersif</title>
+  <link rel="stylesheet" href="styles.css">
 </head>
 <body>
-  <!-- Texte "Appuyez n'importe où" en haut de la page -->
-  <div id="intro">
-    <p>Appuyez n'importe où pour commencer</p>
-  </div>
-  <!-- Sommaire - Caché au départ -->
+
+  <!-- Sommaire -->
   <div id="sommaire">
-    <div id="chapitres">
-      <p>Cliquez sur un chapitre pour ouvrir</p>
-      <a href="#" onclick="ouvrirChapitre('chapitre1')">Chapitre 1</a>
-      <a href="#" onclick="ouvrirChapitre('chapitre2')">Chapitre 2</a>
-      <a href="#" onclick="ouvrirChapitre('chapitre3')">Chapitre 3</a>
-    </div>
+    <h1>Sommaire</h1>
+    <ul>
+      <li><button onclick="ouvrirChapitre('chapitre1')">Chapitre 1</button></li>
+      <li><button onclick="ouvrirChapitre('chapitre2')">Chapitre 2</button></li>
+      <li><button onclick="ouvrirChapitre('chapitre3')">Chapitre 3</button></li>
+      <li><button onclick="ouvrirChapitre('chapitre4')">Chapitre 4</button></li>
+      <li><button onclick="ouvrirChapitre('chapitre5')">Chapitre 5</button></li>
+    </ul>
   </div>
 
-  <!-- Contenu des chapitres -->
-  <div id="contenu">
-    <div id="numeroChapitre"></div>
-    <div id="histoire"></div>
+  <!-- Chapitre 1 -->
+  <div id="contenuChapitre1" class="chapitre">
+    <div id="numeroChapitre">Chapitre 1</div>
+    <div id="histoire">Voici l'histoire du chapitre 1, qui parle des bases...</div>
+    <img src="imageChapitre1.jpg" alt="Image Chapitre 1" class="imageChapitre">
     <div id="retour">
-      <button onclick="retournerSommaire()">Retour au sommaire</button>
+      <button onclick="fermerChapitre()">Retour au sommaire</button>
     </div>
   </div>
 
-  <script>
-    const contenu = {
-      chapitre1: {
-    texte: "Voici l'histoire du chapitre 1, qui parle des bases...",
-    numero: "Chapitre 1",
-    image: "imageChapitre1.jpg", 
-    arrierePlan: "arriere1.jpg"
-  },
-  chapitre2: {
-    texte: "Voici l'histoire du chapitre 2, qui parle des concepts avancés...",
-    numero: "Chapitre 2",
-    image: "imageChapitre2.jpg", 
-    arrierePlan: "arriere2.jpg"
-  },
-  chapitre3: {
-    texte: "Voici l'histoire du chapitre 3, qui parle des techniques intermédiaires...",
-    numero: "Chapitre 3",
-    image: "imageChapitre3.jpg", 
-    arrierePlan: "arriere3.jpg"
-  },
-  chapitre4: {
-    texte: "Voici l'histoire du chapitre 4, qui parle des stratégies avancées...",
-    numero: "Chapitre 4",
-    image: "imageChapitre4.jpg", 
-    arrierePlan: "arriere4.jpg"
-  },
-  chapitre5: {
-    texte: "Voici l'histoire du chapitre 5, qui parle des projets concrets...",
-    numero: "Chapitre 5",
-    image: "imageChapitre5.jpg", 
-    arrierePlan: "arriere5.jpg"
-  }
-};
+  <!-- Chapitre 2 -->
+  <div id="contenuChapitre2" class="chapitre">
+    <div id="numeroChapitre">Chapitre 2</div>
+    <div id="histoire">Voici l'histoire du chapitre 2, qui parle des concepts avancés...</div>
+    <img src="imageChapitre2.jpg" alt="Image Chapitre 2" class="imageChapitre">
+    <div id="retour">
+      <button onclick="fermerChapitre()">Retour au sommaire</button>
+    </div>
+  </div>
 
-    // Affiche le sommaire après un clic
-    document.body.addEventListener('click', () => {
-      const intro = document.getElementById('intro');
-      if (intro) intro.style.display = 'none';
+  <!-- Chapitre 3 -->
+  <div id="contenuChapitre3" class="chapitre">
+    <div id="numeroChapitre">Chapitre 3</div>
+    <div id="histoire">Voici l'histoire du chapitre 3, qui parle des techniques intermédiaires...</div>
+    <img src="imageChapitre3.jpg" alt="Image Chapitre 3" class="imageChapitre">
+    <div id="retour">
+      <button onclick="fermerChapitre()">Retour au sommaire</button>
+    </div>
+  </div>
 
-      const sommaire = document.getElementById('sommaire');
-      if (!sommaire.classList.contains('active')) {
-        sommaire.style.display = 'flex';
-        requestAnimationFrame(() => {
-          sommaire.classList.add('active'); // Activation de l'animation
-        });
-      }
-    });
+  <!-- Chapitre 4 -->
+  <div id="contenuChapitre4" class="chapitre">
+    <div id="numeroChapitre">Chapitre 4</div>
+    <div id="histoire">Voici l'histoire du chapitre 4, qui parle des stratégies avancées...</div>
+    <img src="imageChapitre4.jpg" alt="Image Chapitre 4" class="imageChapitre">
+    <div id="retour">
+      <button onclick="fermerChapitre()">Retour au sommaire</button>
+    </div>
+  </div>
 
-    function ouvrirChapitre(chapitre) {
-      const sommaire = document.getElementById('sommaire');
-      sommaire.style.display = 'none'; // Cache le sommaire
+  <!-- Chapitre 5 -->
+  <div id="contenuChapitre5" class="chapitre">
+    <div id="numeroChapitre">Chapitre 5</div>
+    <div id="histoire">Voici l'histoire du chapitre 5, qui parle des projets concrets...</div>
+    <img src="imageChapitre5.jpg" alt="Image Chapitre 5" class="imageChapitre">
+    <div id="retour">
+      <button onclick="fermerChapitre()">Retour au sommaire</button>
+    </div>
+  </div>
 
-      const chapitreData = contenu[chapitre];
-      document.getElementById('numeroChapitre').textContent = chapitreData.numero;
-      document.getElementById('histoire').textContent = chapitreData.texte;
-
-      const contenuDiv = document.getElementById('contenu');
-      contenuDiv.style.display = 'block'; // Montre le contenu du chapitre
-    }
-
-    function retournerSommaire() {
-      const contenuDiv = document.getElementById('contenu');
-      contenuDiv.style.display = 'none'; // Cache le contenu du chapitre
-
-      const sommaire = document.getElementById('sommaire');
-      sommaire.style.display = 'flex'; // Montre le sommaire
-      sommaire.classList.add('active'); // Réapplique l'animation
-    }
-  </script>
-
+  <script src="scripts.js"></script>
 </body>
 </html>
-

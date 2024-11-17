@@ -20,24 +20,11 @@
       text-align: center;
       overflow: hidden;
     }
-
-    /* L'overlay noir transparent, mais seulement autour du texte */
-    #overlay {
-      position: absolute;
-      top: 50%;
-      left: 50%;
-      transform: translate(-50%, -50%); /* Centrer l'overlay */
-      background-color: rgba(0, 0, 0, 0.5); /* Assombrir mais pas trop */
-      z-index: 1;
-      padding: 20px; /* Espace autour du texte */
-      border-radius: 8px; /* Coins arrondis pour l'overlay */
-    }
-
     /* Texte "Appuyez n'importe où" */
     #intro {
       position: absolute;
       font-size: 24px;
-      color: white;
+      color: red;
       font-weight: bold;
       z-index: 2; /* Doit être au-dessus de l'overlay */
       display: block;

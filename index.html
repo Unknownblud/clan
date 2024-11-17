@@ -8,16 +8,15 @@
     body {
       margin: 0;
       font-family: 'Georgia', serif;
-      background-image: url('arriere.png');
+      background-image: url('arriere.jpg');
       background-size: cover;
       background-position: center;
       color: white;
       height: 100vh;
-      cursor: pointer;
+      overflow: hidden;
       display: flex;
       justify-content: center;
       align-items: center;
-      overflow: hidden;
     }
 
     #intro {
@@ -26,6 +25,7 @@
       z-index: 10;
       color: white;
       text-align: center;
+      cursor: pointer;
     }
 
     #sommaire {
@@ -39,7 +39,7 @@
       align-items: center;
       background-color: rgba(0, 0, 0, 0.9);
       opacity: 0;
-      transition: opacity 0.5s ease-in-out;
+      transition: opacity 1s ease-in-out;
     }
 
     #sommaire.active {
@@ -61,14 +61,20 @@
     #chapitres a:hover {
       transform: scale(1.1);
     }
+
+    #chapitres a:focus {
+      outline: none;
+    }
   </style>
 </head>
 <body>
 
+  <!-- Écran d'introduction -->
   <div id="intro">
     <p>Appuyez n'importe où pour commencer</p>
   </div>
 
+  <!-- Sommaire -->
   <div id="sommaire">
     <div id="chapitres">
       <a href="#" onclick="ouvrirChapitre('chapitre1')">Chapitre 1</a>
@@ -78,19 +84,20 @@
   </div>
 
   <script>
-    // Fonction pour afficher le sommaire
-    document.body.addEventListener('click', () => {
-      const intro = document.getElementById('intro');
-      const sommaire = document.getElementById('sommaire');
+    // Variables globales pour éléments
+    const intro = document.getElementById('intro');
+    const sommaire = document.getElementById('sommaire');
 
-      intro.style.display = 'none'; // Masque l'intro
-      sommaire.classList.add('active'); // Active l'animation du sommaire
-      document.body.style.cursor = 'default'; // Supprime le curseur "pointer"
-    }, { once: true }); // Détecte un seul clic
+    // Au clic sur l'intro
+    intro.addEventListener('click', () => {
+      intro.style.display = 'none'; // Masquer l'introduction
+      sommaire.classList.add('active'); // Afficher et animer le sommaire
+    });
 
-    // Fonction pour ouvrir un chapitre
+    // Ouvrir un chapitre
     function ouvrirChapitre(chapitre) {
-      alert(`Ouverture de ${chapitre}`); // Affiche temporairement une alerte pour tester
+      alert(`Ouverture de ${chapitre}`); // Tester l'ouverture
+      sommaire.classList.remove('active'); // Masquer le sommaire
     }
   </script>
 </body>

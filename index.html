@@ -8,7 +8,7 @@
     body {
       margin: 0;
       font-family: 'Georgia', serif;
-      background-image: url('arriere.png'); /* Arrière-plan visible */
+      background-image: url('arriere.jpg'); /* Arrière-plan visible */
       background-size: cover;
       background-position: center;
       color: white;
@@ -43,11 +43,11 @@
       display: none; /* Initialement caché */
       justify-content: center;
       align-items: center;
-      background-color: rgba(0, 0, 0, 0.8);
+      background-color: rgba(0, 0, 0, 0.8); /* Noir transparent */
       opacity: 0;
       border-radius: 12px;
       padding: 20px;
-      transition: opacity 3s ease, transform 3s ease; /* Animation fluide */
+      transition: opacity 1s ease, transform 1s ease; /* Animation fluide */
     }
 
     #sommaire.active {
@@ -86,14 +86,16 @@
       outline: none;
     }
 
+    /* Contenu des chapitres - Fond noir transparent */
     #contenu {
       display: none;
       padding: 20px;
-      background-color: #333;
-      border-radius: 8px;
+      background-color: rgba(0, 0, 0, 0.8); /* Noir transparent */
+      border-radius: 12px;
       color: white;
       margin: 20px;
       text-align: center;
+      max-width: 80%;
     }
 
     #contenu #numeroChapitre {

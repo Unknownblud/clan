@@ -3,12 +3,12 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Page d'Accueil</title>
+  <title>Sommaire Immersif</title>
   <style>
     body {
       margin: 0;
       font-family: 'Georgia', serif;
-      background-image: url('arriere.png'); /* Arrière-plan visible */
+      background-image: url('arriere.jpg'); /* Arrière-plan visible */
       background-size: cover;
       background-position: center;
       color: white;
@@ -24,14 +24,105 @@
     /* Texte "Appuyez n'importe où" en haut de la page */
     #intro {
       position: absolute;
-      top: 20px; /* Ajuste cette valeur pour déplacer le texte vers le haut */
+      top: 20px;
       left: 50%;
-      transform: translateX(-50%); /* Centrer horizontalement */
+      transform: translateX(-50%);
       font-size: 24px;
       color: white;
       font-weight: bold;
-      z-index: 1; /* Texte au-dessus de l'overlay */
-      text-shadow: 2px 2px 5px black; /* Contour noir pour le texte */
+      z-index: 1;
+      text-shadow: 2px 2px 5px black;
+    }
+
+    /* Le sommaire (chapitres) */
+    #sommaire {
+      position: fixed;
+      top: 50%;
+      left: 50%;
+      transform: translate(-50%, -50%) translateY(50px); /* Commence légèrement en bas */
+      display: none; /* Initialement caché */
+      justify-content: center;
+      align-items: center;
+      background-color: rgba(0, 0, 0, 0.8);
+      opacity: 0;
+      border-radius: 12px;
+      padding: 20px;
+      transition: opacity 1s ease, transform 1s ease; /* Animation fluide */
+    }
+
+    #sommaire.active {
+      display: flex; /* Le sommaire devient visible */
+      opacity: 1;
+      transform: translate(-50%, -50%) translateY(0); /* Arrive à sa position finale */
+    }
+
+    #chapitres {
+      text-align: center;
+    }
+
+    #chapitres p {
+      color: white;
+      font-size: 20px;
+      margin-bottom: 15px;
+    }
+
+    #chapitres a {
+      display: block;
+      padding: 10px 15px;
+      margin: 10px;
+      color: white;
+      text-decoration: none;
+      font-size: 18px;
+      font-weight: bold;
+      transition: background-color 0.3s ease, transform 0.2s ease;
+    }
+
+    #chapitres a:hover {
+      transform: scale(1.1);
+      background-color: rgba(255, 255, 255, 0.2);
+    }
+
+    #chapitres a:focus {
+      outline: none;
+    }
+
+    #contenu {
+      display: none;
+      padding: 20px;
+      background-color: #333;
+      border-radius: 8px;
+      color: white;
+      margin: 20px;
+      text-align: center;
+    }
+
+    #contenu #numeroChapitre {
+      font-size: 30px;
+      font-weight: bold;
+      margin-bottom: 20px;
+    }
+
+    #contenu #histoire {
+      font-size: 20px;
+    }
+
+    #retour {
+      margin-top: 20px;
+      text-align: center;
+    }
+
+    #retour button {
+      background-color: #444;
+      color: white;
+      border: none;
+      padding: 10px;
+      font-size: 16px;
+      cursor: pointer;
+      transition: background-color 0.3s ease;
+    }
+
+    #retour button:hover {
+      background-color: #666;
     }
   </style>
 </head>
@@ -42,11 +133,62 @@
     <p>Appuyez n'importe où pour commencer</p>
   </div>
 
+  <!-- Sommaire - Caché au départ -->
+  <div id="sommaire">
+    <div id="chapitres">
+      <p>Cliquez sur un chapitre pour ouvrir</p>
+      <a href="#" onclick="ouvrirChapitre('chapitre1')">Chapitre 1</a>
+      <a href="#" onclick="ouvrirChapitre('chapitre2')">Chapitre 2</a>
+      <a href="#" onclick="ouvrirChapitre('chapitre3')">Chapitre 3</a>
+    </div>
+  </div>
+
+  <!-- Contenu des chapitres -->
+  <div id="contenu">
+    <div id="numeroChapitre"></div>
+    <div id="histoire"></div>
+    <div id="retour">
+      <button onclick="fermerChapitre()">Retour au sommaire</button>
+    </div>
+  </div>
+
   <script>
-    // Redirection vers la page du sommaire après un clic
+    const contenu = {
+      chapitre1: {
+        texte: "Bienvenue dans le premier chapitre. Ce chapitre aborde les bases.",
+        numero: "Chapitre 1"
+      },
+      chapitre2: {
+        texte: "Ce deuxième chapitre développe les concepts avancés.",
+        numero: "Chapitre 2"
+      },
+      chapitre3: {
+        texte: "Enfin, ce dernier chapitre conclut nos apprentissages.",
+        numero: "Chapitre 3"
+      }
+    };
+
+    // Affiche le sommaire après un clic
     document.body.addEventListener('click', () => {
-      window.location.href = "sommaire.html"; // Dirige vers sommaire.html
+      document.getElementById('intro').style.display = 'none';
+      const sommaire = document.getElementById('sommaire');
+      sommaire.classList.add('active'); // Activation de l'animation
     });
+
+    function ouvrirChapitre(chapitre) {
+      document.getElementById('sommaire').style.display = 'none';
+      const chapitreData = contenu[chapitre];
+      document.getElementById('numeroChapitre').textContent = chapitreData.numero;
+      document.getElementById('histoire').textContent = chapitreData.texte;
+      document.getElementById('contenu').style.display = 'block';
+    }
+
+    function fermerChapitre() {
+      document.getElementById('contenu').style.display = 'none';
+      const sommaire = document.getElementById('sommaire');
+      sommaire.style.display = 'flex';
+      sommaire.classList.remove('active'); // Réinitialisation de l'animation
+    }
   </script>
 
 </body>

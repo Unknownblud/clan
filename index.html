@@ -19,7 +19,6 @@
       align-items: center;
       text-align: center;
       overflow: hidden; /* Empêcher le défilement à l'initial */
-      position: relative; /* Permet de positionner les éléments enfants correctement */
     }
 
     #intro {
@@ -115,19 +114,6 @@
     #retour button:hover {
       background-color: #666;
     }
-
-    /* Arrière-plan assombri seulement pour l'image */
-    #assombrir {
-      background-color: rgba(0, 0, 0, 0.7); /* Assombrir l'arrière-plan */
-      position: absolute;
-      top: 0;
-      left: 0;
-      right: 0;
-      bottom: 0;
-      z-index: 1; /* Placer sous les autres éléments */
-      display: none; /* Cacher par défaut */
-    }
-
   </style>
 </head>
 <body>
@@ -136,9 +122,6 @@
   <div id="intro">
     <p>Appuyez n'importe où pour commencer</p>
   </div>
-
-  <!-- Effet d'assombrissement -->
-  <div id="assombrir"></div>
 
   <!-- Sommaire - Caché au départ -->
   <div id="sommaire">
@@ -187,18 +170,12 @@
       document.getElementById('numeroChapitre').textContent = chapitreData.numero;
       document.getElementById('histoire').textContent = chapitreData.texte;
       document.getElementById('contenu').style.display = 'block';
-
-      // Afficher l'effet d'assombrissement uniquement pour l'image
-      document.getElementById('assombrir').style.display = 'block';
     }
 
     function fermerChapitre() {
       document.getElementById('contenu').style.display = 'none';
       document.getElementById('sommaire').style.display = 'flex';
       document.getElementById('sommaire').classList.remove('active');
-
-      // Cacher l'effet d'assombrissement
-      document.getElementById('assombrir').style.display = 'none';
     }
   </script>
 

@@ -10,8 +10,8 @@
     body {
       margin: 0;
       font-family: 'Playfair Display', serif;
-      background-color: #f5f5f5;
-      color: #333;
+      background-color: #000;
+      color: #fff;
       display: flex;
       justify-content: center;
       align-items: center;
@@ -19,7 +19,7 @@
       overflow: hidden;
       flex-direction: column;
       padding: 0 20px;
-      cursor: pointer; /* Changer le curseur pour indiquer que l'on peut cliquer partout */
+      cursor: pointer;
     }
 
     #introduction {
@@ -47,13 +47,13 @@
 
     #sommaire a {
       text-decoration: none;
-      color: #0073e6;
+      color: #00bfff;
       font-size: 1.5rem;
       transition: color 0.3s, transform 0.3s;
     }
 
     #sommaire a:hover {
-      color: #005bb5;
+      color: #ff7f50;
       transform: scale(1.1); /* Léger agrandissement lors du survol */
     }
 
@@ -129,7 +129,15 @@
     /* Animation pour agrandir légèrement le texte lorsqu'il est survolé */
     #sommaire a:hover {
       font-size: 1.6rem; /* Le texte devient légèrement plus grand */
-      color: #005bb5;
+      color: #ff7f50;
+    }
+
+    /* Vidéo */
+    #chapitre-video {
+      margin-top: 20px;
+      max-width: 100%;
+      height: auto;
+      display: none;
     }
   </style>
 </head>
@@ -151,21 +159,35 @@
     <h1 id="titre-chapitre">Chapitre</h1>
     <p id="contenu-chapitre">Contenu du chapitre...</p>
     <a href="#" class="btn-retour" onclick="retourSommaire()">Retour au sommaire</a>
+
+    <!-- Zone vidéo -->
+    <video id="chapitre-video" controls>
+      <source id="video-source" type="video/mp4">
+      Votre navigateur ne prend pas en charge la vidéo.
+    </video>
   </div>
 
   <div class="clickable-area" onclick="afficherSommaire()"></div>
 
   <script>
     const contenu = {
-      chapitre1: "Bienvenue dans le premier chapitre. Ce chapitre aborde les bases.",
-      chapitre2: "Ce deuxième chapitre développe les concepts avancés.",
-      chapitre3: "Enfin, ce dernier chapitre conclut nos apprentissages."
+      chapitre1: {
+        texte: "Bienvenue dans le premier chapitre. Ce chapitre aborde les bases.",
+        video: "path_to_video_1.mp4"
+      },
+      chapitre2: {
+        texte: "Ce deuxième chapitre développe les concepts avancés.",
+        video: "path_to_video_2.mp4"
+      },
+      chapitre3: {
+        texte: "Enfin, ce dernier chapitre conclut nos apprentissages.",
+        video: "path_to_video_3.mp4"
+      }
     };
 
     function afficherSommaire() {
       document.getElementById('introduction').style.display = 'none';
       document.getElementById('sommaire').style.display = 'block';
-      // Enlever l'événement de clic pour éviter de déclencher l'action plusieurs fois
       document.querySelector('.clickable-area').classList.add('active-clickable');
     }
 
@@ -173,13 +195,20 @@
       document.getElementById('sommaire').style.display = 'none';
       document.getElementById('chapitre-content').style.display = 'block';
       document.getElementById('titre-chapitre').textContent = chapitre.replace('chapitre', 'Chapitre ');
-      document.getElementById('contenu-chapitre').textContent = contenu[chapitre];
+      document.getElementById('contenu-chapitre').textContent = contenu[chapitre].texte;
+
+      // Afficher la vidéo et charger la source
+      const videoElement = document.getElementById('chapitre-video');
+      const videoSource = document.getElementById('video-source');
+      videoSource.src = contenu[chapitre].video;
+      videoElement.style.display = 'block'; // Afficher la vidéo
+      videoElement.load(); // Recharger la vidéo
+      videoElement.play(); // Lancer la lecture de la vidéo
     }
 
     function retourSommaire() {
       document.getElementById('chapitre-content').style.display = 'none';
       document.getElementById('sommaire').style.display = 'block';
-      // Réactiver la zone cliquable
       document.querySelector('.clickable-area').classList.remove('active-clickable');
     }
   </script>

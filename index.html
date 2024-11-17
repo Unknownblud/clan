@@ -1,83 +1,123 @@
 <!DOCTYPE html>
-<html lang="fr">
+<html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Sommaire interactif</title>
-    <style>
-        body {
-            font-family: Arial, sans-serif;
-            background-color: #1a1a1a;
-            color: #ffffff;
-            margin: 0;
-            overflow: hidden;
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            height: 100vh;
-        }
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Sommaire Interactif</title>
+  <style>
+    @import url('https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;700&display=swap');
 
-        .container {
-            text-align: center;
-        }
+    body {
+      margin: 0;
+      font-family: 'Playfair Display', serif;
+      background-color: #f5f5f5;
+      color: #333;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      height: 100vh;
+      overflow: hidden;
+    }
 
-        #message {
-            font-size: 1.5rem;
-            animation: blink 1.5s infinite;
-            cursor: pointer;
-        }
+    #sommaire, #chapitre-content {
+      text-align: center;
+      display: none;
+    }
 
-        @keyframes blink {
-            0%, 100% { opacity: 1; }
-            50% { opacity: 0.5; }
-        }
+    #introduction {
+      cursor: pointer;
+      text-align: center;
+      font-size: 2rem;
+      font-weight: bold;
+      animation: fadeIn 2s ease-in-out;
+    }
 
-        #sommaire {
-            margin-top: 20px;
-            opacity: 0;
-            transform: translateY(20px);
-            transition: all 0.5s ease-in-out;
-            visibility: hidden;
-        }
+    #sommaire ul {
+      list-style: none;
+      padding: 0;
+    }
 
-        .item {
-            margin: 10px 0;
-            font-size: 1.2rem;
-            cursor: pointer;
-        }
+    #sommaire li {
+      margin: 15px 0;
+    }
 
-        .item:hover {
-            color: #00ff88;
-            text-decoration: underline;
-        }
-    </style>
+    #sommaire a {
+      text-decoration: none;
+      color: #0073e6;
+      font-size: 1.5rem;
+      transition: color 0.3s;
+    }
+
+    #sommaire a:hover {
+      color: #005bb5;
+    }
+
+    .btn-retour {
+      margin-top: 20px;
+      display: inline-block;
+      background: #333;
+      color: #fff;
+      padding: 10px 20px;
+      text-decoration: none;
+      border-radius: 5px;
+      transition: background 0.3s;
+    }
+
+    .btn-retour:hover {
+      background: #555;
+    }
+
+    @keyframes fadeIn {
+      from {
+        opacity: 0;
+      }
+      to {
+        opacity: 1;
+      }
+    }
+  </style>
 </head>
 <body>
-    <div class="container">
-        <div id="message">Cliquez n'importe où pour afficher le sommaire...</div>
-        <div id="sommaire">
-            <div class="item">001 - Introduction</div>
-            <div class="item">002 - Chapitre 1 : Les bases</div>
-            <div class="item">003 - Chapitre 2 : Concepts avancés</div>
-            <div class="item">004 - Conclusion</div>
-        </div>
-    </div>
+  <div id="introduction" onclick="afficherSommaire()">Appuyez n'importe où pour commencer</div>
 
-    <script>
-        // Cible les éléments
-        const message = document.getElementById("message");
-        const sommaire = document.getElementById("sommaire");
+  <div id="sommaire">
+    <h1>Sommaire</h1>
+    <ul>
+      <li><a href="#chapitre1" onclick="afficherChapitre('chapitre1')">Chapitre 1 : Introduction</a></li>
+      <li><a href="#chapitre2" onclick="afficherChapitre('chapitre2')">Chapitre 2 : Développement</a></li>
+      <li><a href="#chapitre3" onclick="afficherChapitre('chapitre3')">Chapitre 3 : Conclusion</a></li>
+    </ul>
+  </div>
 
-        // Ajoute un écouteur pour le clic
-        document.addEventListener("click", () => {
-            // Cache le message initial
-            message.style.display = "none";
+  <div id="chapitre-content">
+    <h1 id="titre-chapitre">Chapitre</h1>
+    <p id="contenu-chapitre">Contenu du chapitre...</p>
+    <a href="#" class="btn-retour" onclick="retourSommaire()">Retour au sommaire</a>
+  </div>
 
-            // Affiche et anime le sommaire
-            sommaire.style.visibility = "visible";
-            sommaire.style.opacity = "1";
-            sommaire.style.transform = "translateY(0)";
-        });
-    </script>
+  <script>
+    const contenu = {
+      chapitre1: "Bienvenue dans le premier chapitre. Ce chapitre aborde les bases.",
+      chapitre2: "Ce deuxième chapitre développe les concepts avancés.",
+      chapitre3: "Enfin, ce dernier chapitre conclut nos apprentissages."
+    };
+
+    function afficherSommaire() {
+      document.getElementById('introduction').style.display = 'none';
+      document.getElementById('sommaire').style.display = 'block';
+    }
+
+    function afficherChapitre(chapitre) {
+      document.getElementById('sommaire').style.display = 'none';
+      document.getElementById('chapitre-content').style.display = 'block';
+      document.getElementById('titre-chapitre').textContent = chapitre.replace('chapitre', 'Chapitre ');
+      document.getElementById('contenu-chapitre').textContent = contenu[chapitre];
+    }
+
+    function retourSommaire() {
+      document.getElementById('chapitre-content').style.display = 'none';
+      document.getElementById('sommaire').style.display = 'block';
+    }
+  </script>
 </body>
 </html>

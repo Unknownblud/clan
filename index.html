@@ -8,7 +8,7 @@
     body {
       margin: 0;
       font-family: 'Georgia', serif;
-      background-image: url('arriere.jpg');
+      background-image: url('arriere.jpg'); /* Arrière-plan visible */
       background-size: cover;
       background-position: center;
       color: white;
@@ -21,29 +21,30 @@
       overflow: hidden;
     }
 
-    /* Le div contenant le texte "Appuyez n'importe où" */
+    /* L'overlay noir transparent, mais seulement autour du texte */
+    #overlay {
+      position: absolute;
+      top: 50%;
+      left: 50%;
+      transform: translate(-50%, -50%); /* Centrer l'overlay */
+      background-color: rgba(0, 0, 0, 0.5); /* Assombrir mais pas trop */
+      z-index: 1;
+      padding: 20px; /* Espace autour du texte */
+      border-radius: 8px; /* Coins arrondis pour l'overlay */
+    }
+
+    /* Texte "Appuyez n'importe où" */
     #intro {
       position: absolute;
       font-size: 24px;
       color: white;
       font-weight: bold;
-      z-index: 10;
+      z-index: 2; /* Doit être au-dessus de l'overlay */
       display: block;
       text-shadow: 2px 2px 5px black; /* Contour noir pour le texte */
     }
 
-    /* L'overlay qui couvre toute la page avant de passer au sommaire */
-    #overlay {
-      position: absolute;
-      top: 0;
-      left: 0;
-      right: 0;
-      bottom: 0;
-      background-color: rgba(0, 0, 0, 0.5); /* Assombrir un peu */
-      z-index: 5; /* Derrière le texte "Appuyez n'importe où" */
-      display: block; /* Visible au début */
-    }
-
+    /* Le sommaire (chapitres) */
     #sommaire {
       position: fixed;
       top: 0;
@@ -133,12 +134,9 @@
 </head>
 <body>
 
-  <!-- Overlay noir avant le texte "Appuyez n'importe où" -->
-  <div id="overlay"></div>
-
-  <!-- Texte "Appuyez n'importe où" -->
-  <div id="intro">
-    <p>Appuyez n'importe où pour commencer</p>
+  <!-- L'overlay autour du texte "Appuyez n'importe où" -->
+  <div id="overlay">
+    <p id="intro">Appuyez n'importe où pour commencer</p>
   </div>
 
   <!-- Sommaire - Caché au départ -->
@@ -179,8 +177,8 @@
     // Affiche le sommaire après un clic
     document.body.addEventListener('click', () => {
       document.getElementById('intro').style.display = 'none';
-      document.getElementById('overlay').style.display = 'none'; // Masquer l'overlay
       document.getElementById('sommaire').classList.add('active');
+      document.getElementById('overlay').style.display = 'none'; // Masquer l'overlay une fois le clic
     });
 
     function ouvrirChapitre(chapitre) {

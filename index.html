@@ -93,6 +93,18 @@
       }
     }
 
+    /* Animation pour faire apparaître le sommaire */
+    @keyframes slideIn {
+      from {
+        transform: translateY(-100%);
+        opacity: 0;
+      }
+      to {
+        transform: translateY(0);
+        opacity: 1;
+      }
+    }
+
     /* Ajout d'une règle pour rendre toute la page cliquable sans changer la couleur de fond */
     .clickable-area {
       width: 100%;
@@ -102,6 +114,11 @@
       left: 0;
       z-index: 999;
       cursor: pointer;
+    }
+
+    /* Animation du sommaire */
+    #sommaire {
+      animation: slideIn 1s ease-out;
     }
   </style>
 </head>

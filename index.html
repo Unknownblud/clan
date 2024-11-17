@@ -19,10 +19,10 @@
       overflow: hidden;
       flex-direction: column;
       padding: 0 20px;
+      cursor: pointer; /* Changer le curseur pour indiquer que l'on peut cliquer partout */
     }
 
     #introduction {
-      cursor: pointer;
       text-align: center;
       font-size: 2rem;
       font-weight: bold;
@@ -97,8 +97,8 @@
     }
   </style>
 </head>
-<body>
-  <div id="introduction" onclick="afficherSommaire()">Appuyez n'importe où pour commencer</div>
+<body onclick="afficherSommaire()">
+  <div id="introduction">Appuyez n'importe où pour commencer</div>
 
   <div id="sommaire">
     <h1>Sommaire</h1>
@@ -125,6 +125,8 @@
     function afficherSommaire() {
       document.getElementById('introduction').style.display = 'none';
       document.getElementById('sommaire').style.display = 'block';
+      // Enlever l'événement de clic pour éviter de déclencher l'action plusieurs fois
+      document.body.removeAttribute('onclick');
     }
 
     function afficherChapitre(chapitre) {

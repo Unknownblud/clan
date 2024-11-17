@@ -19,6 +19,7 @@
       align-items: center;
       text-align: center;
       overflow: hidden; /* Empêcher le défilement à l'initial */
+      position: relative; /* Permet de positionner les éléments enfants correctement */
     }
 
     #intro {
@@ -115,15 +116,15 @@
       background-color: #666;
     }
 
-    /* Arrière-plan sombre spécifique pour l'effet d'assombrissement */
+    /* Arrière-plan assombri seulement pour l'image */
     #assombrir {
-      background-color: rgba(0, 0, 0, 0.8); /* Arrière-plan assombri */
-      position: fixed;
+      background-color: rgba(0, 0, 0, 0.7); /* Assombrir l'arrière-plan */
+      position: absolute;
       top: 0;
       left: 0;
       right: 0;
       bottom: 0;
-      z-index: 5; /* Placer l'assombrissement en dessous du contenu */
+      z-index: 1; /* Placer sous les autres éléments */
       display: none; /* Cacher par défaut */
     }
 
@@ -187,7 +188,7 @@
       document.getElementById('histoire').textContent = chapitreData.texte;
       document.getElementById('contenu').style.display = 'block';
 
-      // Afficher l'effet d'assombrissement
+      // Afficher l'effet d'assombrissement uniquement pour l'image
       document.getElementById('assombrir').style.display = 'block';
     }
 

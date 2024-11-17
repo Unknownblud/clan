@@ -77,6 +77,17 @@
       border-radius: 8px;
       color: white;
       margin: 20px;
+      text-align: center;
+    }
+
+    #contenu #numeroChapitre {
+      font-size: 30px;
+      font-weight: bold;
+      margin-bottom: 20px;
+    }
+
+    #contenu #histoire {
+      font-size: 20px;
     }
 
     #retour {
@@ -118,7 +129,8 @@
 
   <!-- Zone de contenu des chapitres -->
   <div id="contenu">
-    <div id="texteChapitre"></div>
+    <div id="numeroChapitre"></div>
+    <div id="histoire"></div>
     <div id="retour">
       <button onclick="fermerChapitre()">Retour au sommaire</button>
     </div>
@@ -128,13 +140,16 @@
     // Données des chapitres
     const contenu = {
       chapitre1: {
-        texte: "Bienvenue dans le premier chapitre. Ce chapitre aborde les bases."
+        texte: "Bienvenue dans le premier chapitre. Ce chapitre aborde les bases.",
+        numero: "Chapitre 1"
       },
       chapitre2: {
-        texte: "Ce deuxième chapitre développe les concepts avancés."
+        texte: "Ce deuxième chapitre développe les concepts avancés.",
+        numero: "Chapitre 2"
       },
       chapitre3: {
-        texte: "Enfin, ce dernier chapitre conclut nos apprentissages."
+        texte: "Enfin, ce dernier chapitre conclut nos apprentissages.",
+        numero: "Chapitre 3"
       }
     };
 
@@ -152,7 +167,8 @@
       document.getElementById('sommaire').style.display = 'none';
       // Afficher le contenu du chapitre
       const chapitreData = contenu[chapitre];
-      document.getElementById('texteChapitre').textContent = chapitreData.texte;
+      document.getElementById('numeroChapitre').textContent = chapitreData.numero;
+      document.getElementById('histoire').textContent = chapitreData.texte;
       document.getElementById('contenu').style.display = 'block';
     }
 

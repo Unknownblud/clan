@@ -1,216 +1,144 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="fr">
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Sommaire Interactif</title>
+  <title>Sommaire avec Animation</title>
   <style>
-    @import url('https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;700&display=swap');
-
     body {
       margin: 0;
-      font-family: 'Playfair Display', serif;
-      background-color: #000;
-      color: #fff;
-      display: flex;
-      justify-content: center;
-      align-items: center;
-      height: 100vh;
+      font-family: 'Arial', sans-serif;
+      background-color: black;
+      color: white;
       overflow: hidden;
-      flex-direction: column;
-      padding: 0 20px;
-      cursor: pointer;
+      height: 100vh;
     }
 
-    #introduction {
-      text-align: center;
-      font-size: 2rem;
-      font-weight: bold;
-      animation: fadeIn 2s ease-in-out;
-      width: 100%;
-      padding: 20px;
-    }
-
-    #sommaire, #chapitre-content {
-      text-align: center;
-      display: none;
-    }
-
-    #sommaire ul {
-      list-style: none;
-      padding: 0;
-    }
-
-    #sommaire li {
-      margin: 15px 0;
-    }
-
-    #sommaire a {
-      text-decoration: none;
-      color: #00bfff;
-      font-size: 1.5rem;
-      transition: color 0.3s, transform 0.3s;
-    }
-
-    #sommaire a:hover {
-      color: #ff7f50;
-      transform: scale(1.1); /* Léger agrandissement lors du survol */
-    }
-
-    #sommaire a:active {
-      transform: scale(1); /* Normalisation quand cliqué */
-    }
-
-    #sommaire a:focus {
-      outline: none;
-    }
-
-    #chapitre-content {
-      text-align: center;
-    }
-
-    .btn-retour {
-      margin-top: 20px;
-      display: inline-block;
-      background: #333;
-      color: #fff;
-      padding: 10px 20px;
-      text-decoration: none;
-      border-radius: 5px;
-      transition: background 0.3s;
-    }
-
-    .btn-retour:hover {
-      background: #555;
-    }
-
-    @keyframes fadeIn {
-      from {
-        opacity: 0;
-      }
-      to {
-        opacity: 1;
-      }
-    }
-
-    /* Animation pour faire apparaître le sommaire */
-    @keyframes fadeInSommaire {
-      from {
-        opacity: 0;
-        transform: scale(0.8);
-      }
-      to {
-        opacity: 1;
-        transform: scale(1);
-      }
-    }
-
-    /* Ajout d'une règle pour rendre toute la page cliquable sans changer la couleur de fond */
-    .clickable-area {
-      width: 100%;
-      height: 100%;
+    #sommaire {
       position: fixed;
       top: 0;
       left: 0;
-      z-index: 999;
-      cursor: pointer;
+      right: 0;
+      bottom: 0;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      opacity: 0;
+      background-color: rgba(0, 0, 0, 0.8);
+      transition: opacity 0.5s ease-in-out;
     }
 
-    /* Animation du sommaire */
-    #sommaire {
-      animation: fadeInSommaire 1s ease-out;
+    #sommaire.active {
+      opacity: 1;
     }
 
-    /* Empêcher la zone cliquable d'interférer avec les liens du sommaire */
-    .active-clickable {
-      pointer-events: none;
+    #chapitres {
+      text-align: center;
     }
 
-    /* Animation pour agrandir légèrement le texte lorsqu'il est survolé */
-    #sommaire a:hover {
-      font-size: 1.6rem; /* Le texte devient légèrement plus grand */
-      color: #ff7f50;
+    #chapitres a {
+      display: block;
+      padding: 10px;
+      margin: 10px;
+      color: white;
+      text-decoration: none;
+      font-size: 18px;
+      font-weight: bold;
+      transition: transform 0.2s ease;
     }
 
-    /* Vidéo */
-    #chapitre-video {
-      margin-top: 20px;
-      max-width: 100%;
-      height: auto;
+    #chapitres a:hover {
+      transform: scale(1.1); /* Agrandir légèrement le texte */
+    }
+
+    #chapitres a:focus {
+      outline: none;
+    }
+
+    #contenu {
       display: none;
+      padding: 20px;
+      background-color: #333;
+      border-radius: 8px;
+      color: white;
+      margin: 20px;
+    }
+
+    #retour {
+      margin-top: 20px;
+      text-align: center;
+    }
+
+    #retour button {
+      background-color: #444;
+      color: white;
+      border: none;
+      padding: 10px;
+      font-size: 16px;
+      cursor: pointer;
+      transition: background-color 0.3s ease;
+    }
+
+    #retour button:hover {
+      background-color: #666;
     }
   </style>
 </head>
 <body>
-  <div id="introduction">
-    Appuyez n'importe où pour commencer
-  </div>
 
+  <!-- Zone du sommaire -->
   <div id="sommaire">
-    <h1>Sommaire</h1>
-    <ul>
-      <li><a href="#chapitre1" onclick="afficherChapitre('chapitre1')">Chapitre 1 : Introduction</a></li>
-      <li><a href="#chapitre2" onclick="afficherChapitre('chapitre2')">Chapitre 2 : Développement</a></li>
-      <li><a href="#chapitre3" onclick="afficherChapitre('chapitre3')">Chapitre 3 : Conclusion</a></li>
-    </ul>
+    <div id="chapitres">
+      <p>Cliquez pour ouvrir un chapitre</p>
+      <a href="#" onclick="ouvrirChapitre('chapitre1')">Chapitre 1</a>
+      <a href="#" onclick="ouvrirChapitre('chapitre2')">Chapitre 2</a>
+      <a href="#" onclick="ouvrirChapitre('chapitre3')">Chapitre 3</a>
+    </div>
   </div>
 
-  <div id="chapitre-content">
-    <h1 id="titre-chapitre">Chapitre</h1>
-    <p id="contenu-chapitre">Contenu du chapitre...</p>
-    <a href="#" class="btn-retour" onclick="retourSommaire()">Retour au sommaire</a>
-
-    <!-- Zone vidéo -->
-    <video id="chapitre-video" controls>
-      <source id="video-source" type="video/mp4">
-      Votre navigateur ne prend pas en charge la vidéo.
-    </video>
+  <!-- Zone de contenu des chapitres -->
+  <div id="contenu">
+    <div id="texteChapitre"></div>
+    <div id="retour">
+      <button onclick="fermerChapitre()">Retour au sommaire</button>
+    </div>
   </div>
-
-  <div class="clickable-area" onclick="afficherSommaire()"></div>
 
   <script>
+    // Données des chapitres
     const contenu = {
       chapitre1: {
-        texte: "Bienvenue dans le premier chapitre. Ce chapitre aborde les bases.",
-        video: "path_to_video_1.mp4"
+        texte: "Bienvenue dans le premier chapitre. Ce chapitre aborde les bases."
       },
       chapitre2: {
-        texte: "Ce deuxième chapitre développe les concepts avancés.",
-        video: "path_to_video_2.mp4"
+        texte: "Ce deuxième chapitre développe les concepts avancés."
       },
       chapitre3: {
-        texte: "Enfin, ce dernier chapitre conclut nos apprentissages.",
-        video: "path_to_video_3.mp4"
+        texte: "Enfin, ce dernier chapitre conclut nos apprentissages."
       }
     };
 
-    function afficherSommaire() {
-      document.getElementById('introduction').style.display = 'none';
-      document.getElementById('sommaire').style.display = 'block';
-      document.querySelector('.clickable-area').classList.add('active-clickable');
-    }
+    // Afficher le sommaire avec animation
+    document.addEventListener('click', () => {
+      document.getElementById('sommaire').classList.add('active');
+    });
 
-    function afficherChapitre(chapitre) {
+    // Ouvrir un chapitre
+    function ouvrirChapitre(chapitre) {
+      // Masquer le sommaire
       document.getElementById('sommaire').style.display = 'none';
-      document.getElementById('chapitre-content').style.display = 'block';
-      document.getElementById('titre-chapitre').textContent = chapitre.replace('chapitre', 'Chapitre ');
-      document.getElementById('contenu-chapitre').textContent = contenu[chapitre].texte;
-
-      // Afficher la vidéo et charger la source
-      const videoElement = document.getElementById('chapitre-video');
-      const videoSource = document.getElementById('video-source');
-      videoSource.src = contenu[chapitre].video;
-      videoElement.style.display = 'block'; // Afficher la vidéo
-      videoElement.load(); // Recharger la vidéo
-      videoElement.play(); // Lancer la lecture de la vidéo
+      // Afficher le contenu du chapitre
+      const chapitreData = contenu[chapitre];
+      document.getElementById('texteChapitre').textContent = chapitreData.texte;
+      document.getElementById('contenu').style.display = 'block';
     }
 
-    function retourSommaire() {
-      document.getElementById('chapitre-content').style.display = 'none';
-      document.getElementById('sommaire').style.display = 'block';
-      document.querySelector('.clickable-area').classList.remove('active-clickable');
+    // Fermer le chapitre et revenir au sommaire
+    function fermerChapitre() {
+      document.getElementById('contenu').style.display = 'none';
+      document.getElementById('sommaire').style.display = 'flex';
     }
   </script>
+
 </body>
 </html>

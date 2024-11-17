@@ -181,11 +181,15 @@
     });
 
     function ouvrirChapitre(chapitre) {
-      document.getElementById('sommaire').style.display = 'none';
-      const chapitreData = contenu[chapitre];
-      document.getElementById('numeroChapitre').textContent = chapitreData.numero;
-      document.getElementById('histoire').textContent = chapitreData.texte;
-      document.getElementById('contenu').style.display = 'block';
+  const sommaire = document.getElementById('sommaire');
+  sommaire.style.display = 'none'; // Masque le sommaire
+  sommaire.classList.remove('active'); // Supprime la classe active pour réinitialisation
+
+  const chapitreData = contenu[chapitre];
+  document.getElementById('numeroChapitre').textContent = chapitreData.numero;
+  document.getElementById('histoire').textContent = chapitreData.texte;
+  document.getElementById('contenu').style.display = 'block'; // Affiche le contenu du chapitre
+}
     }
 
     function fermerChapitre() {

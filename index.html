@@ -115,16 +115,16 @@
       background-color: #666;
     }
 
-    /* Ajout d'un effet d'assombrissement pour les chapitres */
-    .assombrir {
-      background-color: rgba(0, 0, 0, 0.8); /* Arrière-plan légèrement assombri */
+    /* Arrière-plan sombre spécifique pour l'effet d'assombrissement */
+    #assombrir {
+      background-color: rgba(0, 0, 0, 0.8); /* Arrière-plan assombri */
       position: fixed;
       top: 0;
       left: 0;
       right: 0;
       bottom: 0;
-      z-index: 5; /* Placer l'effet en dessous du contenu du chapitre */
-      display: block;
+      z-index: 5; /* Placer l'assombrissement en dessous du contenu */
+      display: none; /* Cacher par défaut */
     }
 
   </style>
@@ -135,6 +135,9 @@
   <div id="intro">
     <p>Appuyez n'importe où pour commencer</p>
   </div>
+
+  <!-- Effet d'assombrissement -->
+  <div id="assombrir"></div>
 
   <!-- Sommaire - Caché au départ -->
   <div id="sommaire">
@@ -184,8 +187,8 @@
       document.getElementById('histoire').textContent = chapitreData.texte;
       document.getElementById('contenu').style.display = 'block';
 
-      // Appliquer l'effet d'assombrissement
-      document.body.classList.add('assombrir');
+      // Afficher l'effet d'assombrissement
+      document.getElementById('assombrir').style.display = 'block';
     }
 
     function fermerChapitre() {
@@ -193,8 +196,8 @@
       document.getElementById('sommaire').style.display = 'flex';
       document.getElementById('sommaire').classList.remove('active');
 
-      // Enlever l'effet d'assombrissement
-      document.body.classList.remove('assombrir');
+      // Cacher l'effet d'assombrissement
+      document.getElementById('assombrir').style.display = 'none';
     }
   </script>
 

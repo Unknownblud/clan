@@ -8,7 +8,7 @@
     body {
       margin: 0;
       font-family: 'Georgia', serif;
-      background-image: url('arriere.png'); /* Arrière-plan visible */
+      background-image: url('arriere.jpg'); /* Arrière-plan visible */
       background-size: cover;
       background-position: center;
       color: white;
@@ -117,14 +117,16 @@
       background-color: #444;
       color: white;
       border: none;
-      padding: 10px;
+      border-radius: 8px; /* Coins arrondis */
+      padding: 10px 20px;
       font-size: 16px;
       cursor: pointer;
-      transition: background-color 0.3s ease;
+      transition: background-color 0.3s ease, transform 0.2s ease; /* Animation fluide */
     }
 
     #retour button:hover {
       background-color: #666;
+      transform: scale(1.05);
     }
   </style>
 </head>
@@ -174,7 +176,8 @@
     document.body.addEventListener('click', () => {
       document.getElementById('intro').style.display = 'none';
       const sommaire = document.getElementById('sommaire');
-      sommaire.classList.add('active'); // Activation de l'animation
+      sommaire.style.display = 'flex';
+      setTimeout(() => sommaire.classList.add('active'), 50); // Correction de l'animation
     });
 
     function ouvrirChapitre(chapitre) {
@@ -190,6 +193,7 @@
       const sommaire = document.getElementById('sommaire');
       sommaire.style.display = 'flex';
       sommaire.classList.remove('active'); // Réinitialisation de l'animation
+      setTimeout(() => sommaire.classList.add('active'), 50); // Relance fluide
     }
   </script>
 

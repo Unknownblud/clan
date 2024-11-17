@@ -8,7 +8,9 @@
     body {
       margin: 0;
       font-family: 'Georgia', serif;
-      background-color: #000;
+      background-image: url('arriere2.png'); /* Nouveau fond d'écran */
+      background-size: cover;
+      background-position: center;
       color: white;
       height: 100vh;
       cursor: default;
@@ -19,7 +21,7 @@
       overflow: hidden;
     }
 
-    /* Style du sommaire avec une animation */
+    /* Sommaire avec animation */
     #sommairePage {
       display: none; /* Initialement caché */
       position: absolute;
@@ -32,6 +34,7 @@
       transition: opacity 1s ease-in-out; /* Animation d'opacité douce */
       justify-content: center;
       align-items: center;
+      animation: fadeInSommaire 1s ease-in-out forwards; /* Animation d'apparition du sommaire */
     }
 
     #sommairePage.active {
@@ -62,11 +65,20 @@
       outline: none;
     }
 
+    /* Animation d'apparition du sommaire */
+    @keyframes fadeInSommaire {
+      0% {
+        opacity: 0;
+      }
+      100% {
+        opacity: 1;
+      }
+    }
   </style>
 </head>
 <body>
 
-  <!-- Nouvelle page pour le sommaire -->
+  <!-- Page du sommaire -->
   <div id="sommairePage">
     <div id="chapitres">
       <p>Cliquez sur un chapitre pour ouvrir</p>
@@ -123,4 +135,3 @@
 
 </body>
 </html>
-

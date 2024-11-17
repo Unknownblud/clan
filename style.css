@@ -1,0 +1,106 @@
+body {
+  font-family: Arial, sans-serif;
+  margin: 0;
+  padding: 0;
+  background-color: #f4f4f4;
+}
+
+#sommaire {
+  display: block;
+  padding: 20px;
+  text-align: center;
+  background-color: #333;
+  color: white;
+}
+
+#sommaire h1 {
+  margin-bottom: 20px;
+}
+
+#sommaire ul {
+  list-style-type: none;
+  padding: 0;
+}
+
+#sommaire li {
+  margin: 10px 0;
+}
+
+#sommaire button {
+  background-color: #444;
+  color: white;
+  border: none;
+  padding: 10px;
+  font-size: 16px;
+  cursor: pointer;
+}
+
+#sommaire button:hover {
+  background-color: #666;
+}
+
+.chapitre {
+  display: none;
+  padding: 20px;
+  border-radius: 8px;
+  color: white;
+  margin: 20px;
+  text-align: center;
+  background-size: cover;
+  background-position: center;
+}
+
+#contenuChapitre1 {
+  background-image: url('arriere1.jpg');
+}
+
+#contenuChapitre2 {
+  background-image: url('arriere2.jpg');
+}
+
+#contenuChapitre3 {
+  background-image: url('arriere3.jpg');
+}
+
+#contenuChapitre4 {
+  background-image: url('arriere4.jpg');
+}
+
+#contenuChapitre5 {
+  background-image: url('arriere5.jpg');
+}
+
+#numeroChapitre {
+  font-size: 30px;
+  font-weight: bold;
+  margin-bottom: 20px;
+}
+
+#histoire {
+  font-size: 20px;
+  margin-bottom: 20px;
+}
+
+.imageChapitre {
+  width: 80%;
+  height: auto;
+  border-radius: 15px;
+  margin-top: 20px;
+}
+
+#retour {
+  margin-top: 20px;
+}
+
+#retour button {
+  background-color: #444;
+  color: white;
+  border: none;
+  padding: 10px;
+  font-size: 16px;
+  cursor: pointer;
+}
+
+#retour button:hover {
+  background-color: #666;
+}

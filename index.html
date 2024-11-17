@@ -157,49 +157,43 @@
   </div>
 
   <script>
-    const contenu = {
-      chapitre1: {
-        texte: "Bienvenue dans le premier chapitre. Ce chapitre aborde les bases.",
-        numero: "Chapitre 1"
-      },
-      chapitre2: {
-        texte: "Ce deuxième chapitre développe les concepts avancés.",
-        numero: "Chapitre 2"
-      },
-      chapitre3: {
-        texte: "Enfin, ce dernier chapitre conclut nos apprentissages.",
-        numero: "Chapitre 3"
-      }
-    };
-
-    // Affiche le sommaire après un clic
-    document.body.addEventListener('click', () => {
-      document.getElementById('intro').style.display = 'none';
-      const sommaire = document.getElementById('sommaire');
-      sommaire.style.display = 'flex';
-      setTimeout(() => sommaire.classList.add('active'), 50); // Correction de l'animation
-    });
-
-    function ouvrirChapitre(chapitre) {
-  const sommaire = document.getElementById('sommaire');
-  sommaire.style.display = 'none'; // Masque le sommaire
-  sommaire.classList.remove('active'); // Supprime la classe active pour réinitialisation
-
-  const chapitreData = contenu[chapitre];
-  document.getElementById('numeroChapitre').textContent = chapitreData.numero;
-  document.getElementById('histoire').textContent = chapitreData.texte;
-  document.getElementById('contenu').style.display = 'block'; // Affiche le contenu du chapitre
-}
+  const contenu = {
+    chapitre1: {
+      texte: "Bienvenue dans le premier chapitre. Ce chapitre aborde les bases.",
+      numero: "Chapitre 1"
+    },
+    chapitre2: {
+      texte: "Ce deuxième chapitre développe les concepts avancés.",
+      numero: "Chapitre 2"
+    },
+    chapitre3: {
+      texte: "Enfin, ce dernier chapitre conclut nos apprentissages.",
+      numero: "Chapitre 3"
     }
+  };
 
-    function fermerChapitre() {
-      document.getElementById('contenu').style.display = 'none';
-      const sommaire = document.getElementById('sommaire');
-      sommaire.style.display = 'flex';
-      sommaire.classList.remove('active'); // Réinitialisation de l'animation
-      setTimeout(() => sommaire.classList.add('active'), 50); // Relance fluide
-    }
-  </script>
+  // Affiche le sommaire après un clic
+  document.body.addEventListener('click', () => {
+    document.getElementById('intro').style.display = 'none';
+    document.getElementById('sommaire').classList.add('active');
+  });
 
+  function ouvrirChapitre(chapitre) {
+    const sommaire = document.getElementById('sommaire');
+    sommaire.style.display = 'none'; // Masque le sommaire
+    sommaire.classList.remove('active'); // Supprime la classe active pour réinitialisation
+
+    const chapitreData = contenu[chapitre];
+    document.getElementById('numeroChapitre').textContent = chapitreData.numero;
+    document.getElementById('histoire').textContent = chapitreData.texte;
+    document.getElementById('contenu').style.display = 'block'; // Affiche le contenu du chapitre
+  }
+
+  function fermerChapitre() {
+    document.getElementById('contenu').style.display = 'none';
+    document.getElementById('sommaire').style.display = 'flex';
+    document.getElementById('sommaire').classList.add('active');
+  }
+</script>
 </body>
 </html>

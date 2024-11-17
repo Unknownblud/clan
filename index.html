@@ -8,7 +8,7 @@
     body {
       margin: 0;
       font-family: 'Georgia', serif;
-      background-image: url('arriere.png'); /* Arrière-plan visible */
+      background-image: url('arriere.jpg'); /* Arrière-plan visible */
       background-size: cover;
       background-position: center;
       color: white;
@@ -41,17 +41,18 @@
       left: 0;
       right: 0;
       bottom: 0;
-      display: none;
+      display: flex;
       justify-content: center;
       align-items: center;
       background-color: rgba(0, 0, 0, 0.9);
-      opacity: 0;
-      transition: opacity 0.5s ease-in-out;
+      opacity: 0; /* Initialement caché */
+      transform: translateY(-20px); /* Position initiale au-dessus de l'écran */
+      transition: opacity 0.5s ease, transform 0.5s ease; /* Animation de l'opacité et du mouvement */
     }
 
     #sommaire.active {
-      display: flex;
-      opacity: 1;
+      opacity: 1; /* Devient visible */
+      transform: translateY(0); /* Se déplace à sa position d'origine */
     }
 
     #chapitres {
@@ -167,7 +168,7 @@
     // Affiche le sommaire après un clic
     document.body.addEventListener('click', () => {
       document.getElementById('intro').style.display = 'none';
-      document.getElementById('sommaire').classList.add('active');
+      document.getElementById('sommaire').classList.add('active'); // Activation de l'animation
     });
 
     function ouvrirChapitre(chapitre) {
@@ -181,7 +182,7 @@
     function fermerChapitre() {
       document.getElementById('contenu').style.display = 'none';
       document.getElementById('sommaire').style.display = 'flex';
-      document.getElementById('sommaire').classList.remove('active');
+      document.getElementById('sommaire').classList.remove('active'); // Désactivation de l'animation
     }
   </script>
 

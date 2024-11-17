@@ -4,18 +4,80 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Sommaire interactif</title>
-    <link rel="stylesheet" href="styles.css">
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #1a1a1a;
+            color: #ffffff;
+            margin: 0;
+            overflow: hidden;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+        }
+
+        .container {
+            text-align: center;
+        }
+
+        #message {
+            font-size: 1.5rem;
+            animation: blink 1.5s infinite;
+            cursor: pointer;
+        }
+
+        @keyframes blink {
+            0%, 100% { opacity: 1; }
+            50% { opacity: 0.5; }
+        }
+
+        #sommaire {
+            margin-top: 20px;
+            opacity: 0;
+            transform: translateY(20px);
+            transition: all 0.5s ease-in-out;
+            visibility: hidden;
+        }
+
+        .item {
+            margin: 10px 0;
+            font-size: 1.2rem;
+            cursor: pointer;
+        }
+
+        .item:hover {
+            color: #00ff88;
+            text-decoration: underline;
+        }
+    </style>
 </head>
 <body>
     <div class="container">
-        <div id="message">Appuyez sur n'importe quelle touche pour continuer...</div>
-        <div id="sommaire" class="hidden">
+        <div id="message">Cliquez n'importe où pour afficher le sommaire...</div>
+        <div id="sommaire">
             <div class="item">001 - Introduction</div>
             <div class="item">002 - Chapitre 1 : Les bases</div>
             <div class="item">003 - Chapitre 2 : Concepts avancés</div>
             <div class="item">004 - Conclusion</div>
         </div>
     </div>
-    <script src="script.js"></script>
+
+    <script>
+        // Cible les éléments
+        const message = document.getElementById("message");
+        const sommaire = document.getElementById("sommaire");
+
+        // Ajoute un écouteur pour le clic
+        document.addEventListener("click", () => {
+            // Cache le message initial
+            message.style.display = "none";
+
+            // Affiche et anime le sommaire
+            sommaire.style.visibility = "visible";
+            sommaire.style.opacity = "1";
+            sommaire.style.transform = "translateY(0)";
+        });
+    </script>
 </body>
 </html>

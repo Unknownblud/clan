@@ -1,1 +1,37 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Page 2</title>
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+  <div id="hamburger">
+    <span></span>
+    <span></span>
+    <span></span>
+  </div>
+
+  <div id="menuOverlay">
+    <a href="index.html">Accueil</a>
+    <a href="1.html">Page 1</a>
+    <a href="2.html" class="active">Page 2</a>
+    <a href="3.html">Page 3</a>
+  </div>
+
+  <h1>Bienvenue sur la Page 2</h1>
+
+  <script>
+    const hamburger = document.getElementById('hamburger');
+    const menuOverlay = document.getElementById('menuOverlay');
+
+    // Ouvrir/Fermer le menu
+    hamburger.addEventListener('click', () => {
+      hamburger.classList.toggle('active');
+      menuOverlay.classList.toggle('active');
+    });
+  </script>
+</body>
+</html>
 

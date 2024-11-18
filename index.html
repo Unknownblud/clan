@@ -168,12 +168,12 @@
     /* Styles du menu hamburger */
     #hamburger {
       position: fixed;
-      top: 20px;
-      left: 20px;
+      top: 10px;
+      left: 10px;
       cursor: pointer;
       z-index: 1000;
-      width: 30px;
-      height: 30px;
+      width: 25px;
+      height: 25px;
       display: flex;
       flex-direction: column;
       justify-content: space-between;
@@ -182,15 +182,15 @@
     #hamburger span {
       display: block;
       width: 100%;
-      height: 4px;
+      height: 3px;
       background-color: white;
-      border-radius: 2px;
+      border-radius: 1px;
       transition: all 0.3s ease;
     }
 
     /* Transformation en croix pour le hamburger actif */
     #hamburger.active span:nth-child(1) {
-      transform: rotate(45deg) translateY(10px);
+      transform: rotate(45deg) translateY(6px);
     }
 
     #hamburger.active span:nth-child(2) {
@@ -198,22 +198,23 @@
     }
 
     #hamburger.active span:nth-child(3) {
-      transform: rotate(-45deg) translateY(-10px);
+      transform: rotate(-45deg) translateY(-6px);
     }
 
     /* Overlay du menu */
     #menuOverlay {
       position: fixed;
-      top: 0;
-      left: 0;
-      width: 100%;
-      height: 100%;
-      background-color: rgba(0, 0, 0, 0.9);
+      top: 40px;
+      left: 10px;
+      background-color: rgba(0, 0, 0, 0.8);
+      padding: 10px;
+      border-radius: 8px;
       display: none;
       flex-direction: column;
       justify-content: center;
-      align-items: center;
+      align-items: flex-start;
       z-index: 999;
+      box-shadow: 0 4px 6px rgba(0, 0, 0, 0.2);
     }
 
     #menuOverlay.active {
@@ -222,9 +223,9 @@
 
     #menuOverlay a {
       color: white;
-      font-size: 24px;
+      font-size: 16px;
       text-decoration: none;
-      margin: 15px 0;
+      margin: 5px 0;
       font-weight: normal;
     }
 
@@ -248,31 +249,27 @@
     <a href="2.html" id="link2">Page 2</a>
     <a href="3.html" id="link3">Page 3</a>
   </div>
-
-  <!-- Contenu de la page -->
 </body>
+<script>
+  // Sélectionner les éléments
+  const hamburger = document.getElementById('hamburger');
+  const menuOverlay = document.getElementById('menuOverlay');
+  const links = document.querySelectorAll('#menuOverlay a');
 
-  <script>
-   // Sélectionner les éléments
-   const hamburger = document.getElementById('hamburger');
-   const menuOverlay = document.getElementById('menuOverlay');
-   const links = document.querySelectorAll('#menuOverlay a');
- 
-   // Ouvrir/Fermer le menu
-   hamburger.addEventListener('click', () => {
-     hamburger.classList.toggle('active');
-     menuOverlay.classList.toggle('active');
-   });
+  // Ouvrir/Fermer le menu
+  hamburger.addEventListener('click', () => {
+    hamburger.classList.toggle('active');
+    menuOverlay.classList.toggle('active');
+  });
 
-   // Mettre en gras la page actuelle
-   const currentPage = window.location.pathname.split('/').pop();
-   links.forEach(link => {
-     if (link.getAttribute('href') === currentPage) {
-       link.classList.add('active');
-     }
-   });
-  </script>
-
+  // Mettre en gras la page actuelle
+  const currentPage = window.location.pathname.split('/').pop();
+  links.forEach(link => {
+    if (link.getAttribute('href') === currentPage) {
+      link.classList.add('active');
+    }
+  });
+</script>
   <script>
     const contenu = {
       chapitre1: {

@@ -137,6 +137,17 @@
       background-color: #666;
     }
   </style>
+  <style>
+    /* Initialement, cacher le bouton hamburger */
+    #hamburger {
+        display: none;
+    }
+
+    /* Afficher le bouton hamburger uniquement lorsque le sommaire est visible */
+    #sommaire.active + #hamburger {
+        display: block;
+    }
+</style>
 </head>
 <body>
   <div id="intro">

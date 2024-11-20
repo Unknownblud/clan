@@ -61,4 +61,53 @@
       display: none;
       flex-direction: column;
       justify-content: center;
-      align-i
+      align-items: flex-start;
+      z-index: 999;
+      box-shadow: 0 4px 6px rgba(0, 0, 0, 0.2);
+    }
+
+    #menuOverlay.active {
+      display: flex;
+    }
+
+    #menuOverlay a {
+      color: white;
+      font-size: 16px;
+      text-decoration: none;
+      margin: 5px 0;
+      font-weight: normal;
+    }
+
+    #menuOverlay a.active {
+      font-weight: bold;
+    }
+  </style>
+</head>
+<body>
+  <div id="hamburger">
+    <span></span>
+    <span></span>
+    <span></span>
+  </div>
+
+  <div id="menuOverlay">
+    <a href="index.html">Accueil</a>
+    <a href="1.html">Page 1</a>
+    <a href="2.html">Page 2</a>
+    <a href="3.html" class="active">Page 3</a>
+  </div>
+
+  <h1>Bienvenue sur la Page 3</h1>
+
+  <script>
+    const hamburger = document.getElementById('hamburger');
+    const menuOverlay = document.getElementById('menuOverlay');
+
+    // Ouvrir/Fermer le menu
+    hamburger.addEventListener('click', () => {
+      hamburger.classList.toggle('active');
+      menuOverlay.classList.toggle('active');
+    });
+  </script>
+</body>
+</html>
